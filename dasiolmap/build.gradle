@@ -56,7 +56,7 @@ dependencies {
 	// env
 	// 보안상 중요한 정보를 github 에 푸시하지 않고 코드에서 참조만 할 수 있도록 
 	implementation 'io.github.cdimascio:dotenv-java:3.0.0'
-
+	
 	//open ai
 	implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 	implementation 'com.fasterxml.jackson.core:jackson-databind'

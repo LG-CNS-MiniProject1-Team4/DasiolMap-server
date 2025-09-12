@@ -1,6 +1,7 @@
 package com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto;
 
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entitly.DasiolReviewEntity;
+import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,16 +16,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DasiolReviewResponseDTO {
-    private Integer reviewId;
-    private String riview;
+public class DasiolReviewRequsetDTO {
+    private String review;
     private Integer storeId;
 
-    public static DasiolReviewResponseDTO fromEntity(DasiolReviewEntity entity) {
-        return DasiolReviewResponseDTO.builder()
-                .reviewId(entity.getReviewId())
-                .riview(entity.getReview())
-                .storeId(entity.getStore().getStoreId())
+    public DasiolReviewEntity toEntity(DasiolStoreEntity store) {
+        return DasiolReviewEntity.builder()
+                .review(review)
+                .store(store)
                 .build();
     }
 

@@ -9,7 +9,7 @@ import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreRequsetDT
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreResponseDTO;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
-import com.dasiolmapserver.dasiolmap.util.JwtProvider;
+//import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
 import jakarta.transaction.Transactional;
 
@@ -18,11 +18,11 @@ public class DasiolStoreService {
     @Autowired
     private DasiolStoreRepository dasiolStoreRepository;
 
-    @Autowired
-    private JwtProvider provider;
+    // @Autowired
+    // private JwtProvider provider;
 
     public List<DasiolStoreResponseDTO> select() {
-        System.out.println("[debug] >>> blog service select ");
+        System.out.println("[debug] >>> store service select ");
         List<DasiolStoreEntity> list = dasiolStoreRepository.findAll();
         return list.stream()
                 .map(entity -> DasiolStoreResponseDTO.builder()
@@ -35,7 +35,7 @@ public class DasiolStoreService {
     }
 
     public DasiolStoreResponseDTO insert(DasiolStoreRequsetDTO request) {
-        System.out.println("[debug] >>> blog service insert ");
+        System.out.println("[debug] >>> store service insert ");
         DasiolStoreEntity store = dasiolStoreRepository.save(DasiolStoreEntity.builder()
                 .storeId(request.getStoreId())
                 .storeName(request.getStoreName())
@@ -46,7 +46,7 @@ public class DasiolStoreService {
         return DasiolStoreResponseDTO.fromEntity(store);
     }
 
-    public DasiolStoreResponseDTO findStore(String storeId) {
+    public DasiolStoreResponseDTO findStore(Integer storeId) {
         System.out.println("[debug] >>> Store service findStore ");
         DasiolStoreEntity storeEntity = dasiolStoreRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("해당 가게가 존재하지 않습니다."));
@@ -59,8 +59,8 @@ public class DasiolStoreService {
     }
 
     @Transactional
-    public DasiolStoreEntity update(String storeid, DasiolStoreRequsetDTO request) {
-        System.out.println("[debug] >>> blog service update ");
+    public DasiolStoreEntity update(Integer storeid, DasiolStoreRequsetDTO request) {
+        System.out.println("[debug] >>> store service update ");
         request.setStoreId(storeid);
         DasiolStoreEntity entity = dasiolStoreRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new RuntimeException("가게 없음"));

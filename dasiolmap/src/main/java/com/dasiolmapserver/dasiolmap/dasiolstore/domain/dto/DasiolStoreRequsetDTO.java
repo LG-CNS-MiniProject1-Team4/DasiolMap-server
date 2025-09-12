@@ -16,7 +16,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class DasiolStoreRequsetDTO {
-    private String storeId;
+    private Integer storeId;
     private String storeName;
     private String address;
     private String location;

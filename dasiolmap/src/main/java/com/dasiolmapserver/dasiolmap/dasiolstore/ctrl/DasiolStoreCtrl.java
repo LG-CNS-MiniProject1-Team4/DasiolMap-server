@@ -20,7 +20,7 @@ import com.dasiolmapserver.dasiolmap.dasiolstore.service.DasiolStoreService;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("/api/v2/dasiol/store")
+@RequestMapping("/api/v2/dasiolmap/store")
 public class DasiolStoreCtrl {
 
     @Autowired
@@ -40,7 +40,7 @@ public class DasiolStoreCtrl {
     public ResponseEntity<Void> register(
             @RequestBody DasiolStoreRequsetDTO request) {
 
-        System.out.println("[debug] >>> blog ctrl path POST : /register ");
+        System.out.println("[debug] >>> store ctrl path POST : /register ");
         System.out.println("[debug] param dto = " + request);
 
         DasiolStoreResponseDTO result = storeService.insert(request);
@@ -52,9 +52,9 @@ public class DasiolStoreCtrl {
     }
 
     @GetMapping("/read/{storeId}")
-    public ResponseEntity<DasiolStoreResponseDTO> read(@PathVariable("blogId") String storeId) {
-        System.out.println("[debug] >>>> blog ctrl path GET : /read");
-        System.out.println("[debug] params blog id = " + storeId);
+    public ResponseEntity<DasiolStoreResponseDTO> read(@PathVariable("storeId") Integer storeId) {
+        System.out.println("[debug] >>>> store ctrl path GET : /read");
+        System.out.println("[debug] params store id = " + storeId);
         DasiolStoreResponseDTO response = storeService.findStore(storeId);
         System.out.println("[debug] result = " + response);
 
@@ -67,7 +67,7 @@ public class DasiolStoreCtrl {
 
     @PutMapping("/update/{storeId}")
     public ResponseEntity<Void> update(
-            @PathVariable("id") String storeId,
+            @PathVariable("id") Integer storeId,
             @org.springframework.web.bind.annotation.RequestBody DasiolStoreRequsetDTO request) {
 
         System.out.println("[debug] >>> Store ctrl path PUT : /update ");

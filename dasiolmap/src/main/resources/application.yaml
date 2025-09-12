@@ -27,7 +27,7 @@ spring:
   jpa:
     hibernate:
       # create, create-drop, update, none
-      ddl-auto: none
+      ddl-auto: create
     # 콘솔출력
     show-sql: true
     properties:
@@ -45,11 +45,11 @@ spring:
 server:
   port: 8088
 
-# token
+ # token
 jwt:
   secret: ${JWT_SECRET_KEY}
 
-openApi:
+# openApi:
   serviceKey: ${SERVICE_KEY}
   callBackUrl: ${CALLBACKURL}
   dataType: ${TYPE}
