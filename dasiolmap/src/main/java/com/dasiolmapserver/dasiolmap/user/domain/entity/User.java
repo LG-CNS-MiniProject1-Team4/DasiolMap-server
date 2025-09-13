@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 @Entity     // 이 클래스가 데이터베이스 테이블과 연결된 것임을 알려줍니다.
 @Getter
@@ -26,4 +27,11 @@ public class User {
 
     @Column(nullable = false)
     private String nickname;
+
+    @Builder // Builder 어노테이션 추가!
+    public User(String email, String password, String nickname) {
+        this.email = email;
+        this.password = password;
+        this.nickname = nickname;
+    }
 }
