@@ -21,11 +21,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // CSRF 보호 비활성화 (개발 초기 단계)
+            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/api/user/signup").permitAll() // '/api/user/signup' 경로는 인증 없이 허용
-                .anyRequest().authenticated() // 나머지 모든 경로는 인증 필요
+                .requestMatchers("/api/user/signup").permitAll()
+                .anyRequest().authenticated()
             );
         return http.build();
     }
 }
+
+// .csrf(csrf -> csrf.disable())   // CSRF 보호 비활성화 (개발 초기 단계)
+// .anyRequest().authenticated() // 나머지 모든 경로는 인증 필요
+// .requestMatchers("/api/user/signup").permitAll() // '/api/user/signup' 경로는 인증 없이 허용
