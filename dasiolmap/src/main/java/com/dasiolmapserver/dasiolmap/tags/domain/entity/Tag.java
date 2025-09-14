@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Getter
+@NoArgsConstructor
+@Table(name = "tags")
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,4 +15,5 @@ public class Tag {
 
     @Column(nullable = false, unique = true)
     private String tagName;
+    
 }
