@@ -3,7 +3,7 @@ package com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entitly.DasiolReviewEntity;
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;

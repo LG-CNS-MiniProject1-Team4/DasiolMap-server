@@ -1,7 +1,7 @@
-package com.dasiolmapserver.dasiolmap.dasiolreview.domain.entitly;
+package com.dasiolmapserver.dasiolmap.sotrePhotos.domain.entity;
 
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entitly.DasiolReviewEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,17 +25,25 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DasiolReviewEntity {
+public class StorePhotosEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer reviewId;
-
-    @Column(nullable = false, length = 500)
-    private String review;
+    private Integer id; // 사진 PK
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "storeId")
-    @JsonManagedReference
-    private DasiolStoreEntity store;
+    private DasiolStoreEntity storeId;
+
+    // @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    // @JoinColumn(name = "user_id")
+    // private UserEntity user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "reviewId")
+    private DasiolReviewEntity reviewId;
+
+    @Column(nullable = false, length = 1000)
+    private String photoUrl; //
+
 }
