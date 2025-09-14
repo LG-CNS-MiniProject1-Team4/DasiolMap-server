@@ -29,11 +29,11 @@ public class StorePhotosEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; // 사진 PK
+    private Integer storePhotoId; // 사진 PK
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "storeId")
-    private DasiolStoreEntity storeId;
+    private DasiolStoreEntity store;
 
     // @ManyToOne(fetch = FetchType.LAZY, optional = false)
     // @JoinColumn(name = "user_id")
@@ -41,7 +41,7 @@ public class StorePhotosEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "reviewId")
-    private DasiolReviewEntity reviewId;
+    private DasiolReviewEntity review;
 
     @Column(nullable = false, length = 1000)
     private String photoUrl; //

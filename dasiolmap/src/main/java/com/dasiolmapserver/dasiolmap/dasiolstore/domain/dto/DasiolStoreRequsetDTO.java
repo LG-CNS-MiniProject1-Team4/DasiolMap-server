@@ -16,14 +16,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class DasiolStoreRequsetDTO {
-    private Integer storeId;
     private String storeName;
     private String address;
     private String location;
 
     public DasiolStoreEntity toEntity() {
         return DasiolStoreEntity.builder()
-                .storeId(this.storeId)
                 .storeName(this.storeName)
                 .address(this.address)
                 .location(this.location)

@@ -22,7 +22,7 @@ public class DasiolReviewRequsetDTO {
 
     public DasiolReviewEntity toEntity(DasiolStoreEntity store) {
         return DasiolReviewEntity.builder()
-                .review(review)
+                .review(this.review)
                 .store(store)
                 .build();
     }

@@ -37,7 +37,6 @@ public class DasiolStoreService {
     public DasiolStoreResponseDTO insert(DasiolStoreRequsetDTO request) {
         System.out.println("[debug] >>> store service insert ");
         DasiolStoreEntity store = dasiolStoreRepository.save(DasiolStoreEntity.builder()
-                .storeId(request.getStoreId())
                 .storeName(request.getStoreName())
                 .address(request.getAddress())
                 .location(request.getLocation())
@@ -59,9 +58,9 @@ public class DasiolStoreService {
     }
 
     @Transactional
-    public DasiolStoreEntity update(Integer storeid, DasiolStoreRequsetDTO request) {
+    public DasiolStoreEntity update(Integer storeId, DasiolStoreEntity request) {
         System.out.println("[debug] >>> store service update ");
-        request.setStoreId(storeid);
+        request.setStoreId(storeId);
         DasiolStoreEntity entity = dasiolStoreRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new RuntimeException("가게 없음"));
 

@@ -22,7 +22,7 @@ public class DasiolReviewResponseDTO {
 
     public static DasiolReviewResponseDTO fromEntity(DasiolReviewEntity entity) {
         return DasiolReviewResponseDTO.builder()
-                .reviewId(entity.getId())
+                .reviewId(entity.getReviewId())
                 .riview(entity.getReview())
                 .storeId(entity.getStore().getStoreId())
                 .build();

@@ -1,4 +1,4 @@
-package com.dasiolmapserver.dasiolmap.sotrePhoto.ctrl;
+package com.dasiolmapserver.dasiolmap.storePhotos.ctrl;
 
 public class StorePhotoCtrl {
 

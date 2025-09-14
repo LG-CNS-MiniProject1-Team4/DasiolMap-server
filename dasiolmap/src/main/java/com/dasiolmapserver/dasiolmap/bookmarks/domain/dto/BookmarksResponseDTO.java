@@ -1,5 +1,7 @@
 package com.dasiolmapserver.dasiolmap.bookmarks.domain.dto;
 
+import com.dasiolmapserver.dasiolmap.bookmarks.domain.entity.BookmarksEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,11 +20,11 @@ public class BookmarksResponseDTO {
     private Integer storeId;
     private Integer userId;
 
-    public static BookmarksResponseDTO fromEntity(BookmarksResponseDTO entity) {
+    public static BookmarksResponseDTO fromEntity(BookmarksEntity entity) {
         return BookmarksResponseDTO.builder()
-                .bookmarksId(entity.getBookmarksId())
-                .storeId(entity.getStoreId())
-                .userId(entity.getUserId())
+                .bookmarksId(entity.getBookmarkId())
+                .storeId(entity.getStore().getStoreId())
+                // .userId(entity.getUserId())
                 .build();
     }
 

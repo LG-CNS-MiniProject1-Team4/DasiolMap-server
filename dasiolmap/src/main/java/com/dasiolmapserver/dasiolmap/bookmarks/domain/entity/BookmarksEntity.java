@@ -29,7 +29,7 @@ public class BookmarksEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer bookmarkId;
 
     // @ManyToOne(fetch = FetchType.LAZY, optional = false)
     // @JoinColumn(name = "userId")

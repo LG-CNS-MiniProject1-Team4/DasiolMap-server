@@ -30,7 +30,7 @@ public class DasiolReviewEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer reviewId;
 
     @Column(nullable = false, length = 500)
     private String review;
