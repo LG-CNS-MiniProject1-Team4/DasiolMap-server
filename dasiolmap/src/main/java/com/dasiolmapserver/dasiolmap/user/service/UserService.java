@@ -1,33 +1,49 @@
 package com.dasiolmapserver.dasiolmap.user.service;
 
-import com.dasiolmapserver.dasiolmap.user.domain.dto.UserSignUpRequestDto;
-import com.dasiolmapserver.dasiolmap.user.domain.entity.User;
-import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import com.dasiolmapserver.dasiolmap.user.domain.dto.UserRequestDTO;
+import com.dasiolmapserver.dasiolmap.user.domain.dto.UserResponseDTO;
+import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
+import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
+import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
 @Service
-@RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class UserService {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private JwtProvider provider;
 
-    @Transactional
-    public void signUp(UserSignUpRequestDto requestDto) {
-        // 1. 비밀번호 암호화
-        String encodedPassword = passwordEncoder.encode(requestDto.getPassword());
+    public UserResponseDTO signup(UserRequestDTO request) {
+        System.out.println(">>> service signup");
+        UserEntity entity = userRepository.save(request.toEntity());
+        System.out.println(">>> after save: "+entity);
+        
+        UserResponseDTO dto = UserResponseDTO.fromEntity(entity);
+        System.out.println(">>> response dto: "+dto);
 
-        // 2. DTO를 Entity로 변환하여 User 객체 생성
-        User user = User.builder()
-                .email(requestDto.getEmail())
-                .password(encodedPassword)
-                .nickname(requestDto.getNickname())
-                .build();
+        return dto;
+    }
 
-        // 3. Repository를 통해 DB에 저장
-        userRepository.save(user);
+    public Map<String, Object> login(UserRequestDTO request) {
+        System.out.println(">>> service login");
+        UserEntity entity = userRepository.findByEmailAndPasswdAndNickname(request.getEmail(), request.getPasswd(), request.getNickname());
+
+        String accToken = provider.generateAccessToken(request.getEmail());
+        String refToken = provider.generateRefreshToken(request.getEmail());
+        UserResponseDTO response = UserResponseDTO.fromEntity(entity);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("response", response);
+        map.put("access", accToken);
+        map.put("refresh", refToken);
+        return map;
+
     }
 }
