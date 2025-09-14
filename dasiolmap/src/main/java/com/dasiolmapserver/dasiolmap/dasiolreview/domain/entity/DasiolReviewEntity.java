@@ -1,4 +1,4 @@
-package com.dasiolmapserver.dasiolmap.dasiolreview.domain.entitly;
+package com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity;
 
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

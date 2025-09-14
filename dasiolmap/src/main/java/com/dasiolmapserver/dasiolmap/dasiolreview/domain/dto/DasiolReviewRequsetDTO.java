@@ -1,6 +1,6 @@
 package com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto;
 
-import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entitly.DasiolReviewEntity;
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 
 import lombok.AllArgsConstructor;

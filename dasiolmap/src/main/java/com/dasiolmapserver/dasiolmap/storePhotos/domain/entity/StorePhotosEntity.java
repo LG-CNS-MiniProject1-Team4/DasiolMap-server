@@ -1,6 +1,6 @@
-package com.dasiolmapserver.dasiolmap.sotrePhotos.domain.entity;
+package com.dasiolmapserver.dasiolmap.storePhotos.domain.entity;
 
-import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entitly.DasiolReviewEntity;
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 
 import jakarta.persistence.Column;
