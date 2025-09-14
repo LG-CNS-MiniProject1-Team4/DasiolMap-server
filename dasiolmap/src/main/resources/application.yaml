@@ -2,14 +2,14 @@ spring:
   application:
     name: dasiolmap
 
-  # ai:
-  #   openai:
-  #     model: ${OPEN_AI_MODEL}
-  #     api:
-  #       key: ${OPEN_AI_KEY}
-  #       url: ${OPEN_AI_URL}
+  ai:
+    openai:
+      model: ${OPEN_AI_MODEL}
+      api:
+        key: ${OPEN_AI_KEY}
+        url: ${OPEN_AI_URL}
 
-  # # mariadb
+  # mariadb
   datasource:
     driver-class-name: ${DRIVER}
     url: ${URL}
@@ -28,7 +28,10 @@ spring:
     hibernate:
       # create, create-drop, update, none
       ddl-auto: none
+<<<<<<< HEAD
       # 맨 처음 실행 시 create -> none
+=======
+>>>>>>> feature/#4-store
     # 콘솔출력
     show-sql: true
     properties:
@@ -48,9 +51,18 @@ server:
 
 # token
 jwt:
+<<<<<<< HEAD
   secret: "dasiolmap-super-secret-key-for-jwt-123456789"
 
 # openApi:
 #   serviceKey: ${SERVICE_KEY}
 #   callBackUrl: ${CALLBACKURL}
 #   dataType: ${TYPE}
+=======
+  secret: ${JWT_SECRET_KEY}
+
+openApi:
+  serviceKey: ${SERVICE_KEY}
+  callBackUrl: ${CALLBACKURL}
+  dataType: ${TYPE}
+>>>>>>> feature/#4-store
