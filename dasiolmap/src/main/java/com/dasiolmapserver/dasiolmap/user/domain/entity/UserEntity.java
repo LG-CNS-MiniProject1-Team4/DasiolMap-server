@@ -2,6 +2,9 @@ package com.dasiolmapserver.dasiolmap.user.domain.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.dasiolmapserver.dasiolmap.bookmarks.domain.entity.BookmarksEntity;
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
+import com.dasiolmapserver.dasiolmap.storePhotos.domain.entity.StorePhotosEntity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -48,12 +51,12 @@ public class UserEntity {
     private LocalDateTime createdAt;
 
     // 연관관계
-    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    // private List<PhotoEntity> photos = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StorePhotosEntity> photos = new ArrayList<>();
 
-    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    // private List<ReviewEntity> reviews = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DasiolReviewEntity> review = new ArrayList<>();
 
-    // @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    // private List<BookmarkEntity> bookmarks = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BookmarksEntity> bookmarks = new ArrayList<>();
 }

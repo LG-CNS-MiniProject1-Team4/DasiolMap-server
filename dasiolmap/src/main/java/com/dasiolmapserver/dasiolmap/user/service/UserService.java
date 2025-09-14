@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dasiolmapserver.dasiolmap.user.domain.dto.UserRequestDTO;
 import com.dasiolmapserver.dasiolmap.user.domain.dto.UserResponseDTO;
+import com.dasiolmapserver.dasiolmap.user.domain.dto.UserUpdateRequestDTO;
 import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
 import com.dasiolmapserver.dasiolmap.util.JwtProvider;
@@ -45,5 +46,25 @@ public class UserService {
         map.put("refresh", refToken);
         return map;
 
+    }
+
+    public UserResponseDTO updateUser(String email, UserUpdateRequestDTO request) {
+        System.out.println(">>> service updateUser");
+        
+        
+        UserEntity user = userRepository.findByEmail(email);
+        if( user == null ){
+            throw new RuntimeException("User not found with email: "+ email);
+        }
+        if(request.getNickname() != null && request.getPasswd() != null) {
+            user.setNickname(request.getNickname());
+            user.setPasswd(request.getPasswd());
+            System.out.println("update success/ nickname: "+ user.getNickname()+", passwd: "+ user.getPasswd());
+        }                             
+        
+
+        UserEntity updated = userRepository.save(user);
+        
+        return UserResponseDTO.fromEntity(updated);
     }
 }

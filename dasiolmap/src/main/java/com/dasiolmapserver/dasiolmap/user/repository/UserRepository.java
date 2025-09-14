@@ -8,4 +8,5 @@ import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     public UserEntity findByEmailAndPasswdAndNickname(String email, String passwd, String nickname);
+    public UserEntity findByEmail(String email);
 }

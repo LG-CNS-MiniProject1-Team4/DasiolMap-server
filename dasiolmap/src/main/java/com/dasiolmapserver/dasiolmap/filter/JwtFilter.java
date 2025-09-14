@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
@@ -19,6 +20,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
+@Order(1) // filter 가장 먼저 실행
 public class JwtFilter implements Filter {
 
     @Value("${jwt.secret}")
@@ -46,6 +48,7 @@ public class JwtFilter implements Filter {
         System.out.println("[debug] >>> client path " + path);
         String method = req.getMethod();
         System.out.println("[debug] >>> client method : " + method);
+        // System.out.println("[debug] >>> Authorization Header : " + req.getHeader("Authorization"));
 
         if ("OPTIONS".equalsIgnoreCase(req.getMethod())) {
             res.setStatus(HttpServletResponse.SC_OK);

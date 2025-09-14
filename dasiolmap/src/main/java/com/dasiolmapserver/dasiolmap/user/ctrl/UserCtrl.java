@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dasiolmapserver.dasiolmap.user.domain.dto.UserRequestDTO;
 import com.dasiolmapserver.dasiolmap.user.domain.dto.UserResponseDTO;
 import com.dasiolmapserver.dasiolmap.user.service.UserService;
+import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
-import okhttp3.Response;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,12 +21,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
+
 @RestController
 @RequestMapping("/api/v2/dasiolmap/user")
 public class UserCtrl {
     
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtProvider jwtProvider;
 
     @PostMapping("/signup")
     public ResponseEntity signup(@RequestBody UserRequestDTO request, BindingResult bindingResult) {
@@ -64,5 +68,5 @@ public class UserCtrl {
                                 .header("Refresh-Token", (String)(map.get("refresh")))
                                 .body((UserResponseDTO)map.get("response"));
     }
-    
+     
 }
