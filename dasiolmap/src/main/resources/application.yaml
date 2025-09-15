@@ -9,7 +9,7 @@ spring:
         key: ${OPEN_AI_KEY}
         url: ${OPEN_AI_URL}
 
-  # mariadb
+  #mariadb
   datasource:
     driver-class-name: ${DRIVER}
     url: ${URL}
@@ -20,15 +20,14 @@ spring:
   # datasource:
   #     driver-class-name:  org.h2.Driver
   #     # url: jdbc:h2:mem:inspire
-  #     url: jdbc:h2:file:./data/inspire;AUTO_SERVER=TRUE
+  #     url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MYSQL
   #     username: root
   #     password:
 
   jpa:
     hibernate:
       # create, create-drop, update, none
-
-      ddl-auto: create
+      ddl-auto: create-drop
 
     # 콘솔출력
     show-sql: true
@@ -49,6 +48,7 @@ server:
 
  # token
 jwt:
+  #secret: jslim-super-secret-key-for-jwt-123456789
   secret: ${JWT_SECRET_KEY}
 
 # openApi:

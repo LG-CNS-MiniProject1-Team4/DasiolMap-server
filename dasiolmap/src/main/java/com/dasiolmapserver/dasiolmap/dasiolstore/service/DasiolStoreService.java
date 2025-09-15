@@ -1,24 +1,21 @@
 package com.dasiolmapserver.dasiolmap.dasiolstore.service;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewRequsetDTO;
-import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
-import com.dasiolmapserver.dasiolmap.dasiolreview.repository.DasiolReviewRepository;
+
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreRequsetDTO;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreResponseDTO;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
 import com.dasiolmapserver.dasiolmap.storeTag.domain.dto.StoreTagRequestDTO;
-import com.dasiolmapserver.dasiolmap.storeTag.domain.entity.StoreTagEntity;
+
 import com.dasiolmapserver.dasiolmap.storeTag.repository.StoreTagRepository;
 import com.dasiolmapserver.dasiolmap.tag.domain.dto.TagRequestDTO;
 import com.dasiolmapserver.dasiolmap.tag.repository.TagRepository;
-import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
 import jakarta.transaction.Transactional;
 
@@ -33,12 +30,10 @@ public class DasiolStoreService {
     @Autowired
     private TagRepository tagRepository;
 
-    @Autowired
-    private JwtProvider provider;
-
     public List<DasiolStoreResponseDTO> select() {
         System.out.println("[debug] >>> store service select ");
         List<DasiolStoreEntity> list = dasiolStoreRepository.findAll();
+
         return list.stream()
                 .map(entity -> DasiolStoreResponseDTO.builder()
                         .storeId(entity.getStoreId())

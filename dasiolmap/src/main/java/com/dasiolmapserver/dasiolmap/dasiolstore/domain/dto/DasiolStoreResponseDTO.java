@@ -27,6 +27,7 @@ public class DasiolStoreResponseDTO {
         private String storeName;
         private String address;
         private String location;
+        private Float avgRating;
 
         private List<DasiolReviewResponseDTO> reviews;
         private List<StorePhotoResponseDTO> photos;
@@ -39,6 +40,7 @@ public class DasiolStoreResponseDTO {
                                 .storeName(store.getStoreName())
                                 .address(store.getAddress())
                                 .location(store.getLocation())
+                                .avgRating(store.getAvgRating())
                                 .reviews(store.getReviews().stream()
                                                 .map(e -> DasiolReviewResponseDTO.fromEntity(e))
                                                 .toList())

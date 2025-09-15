@@ -36,7 +36,7 @@ public class DasiolReviewService {
 
         reviewRepository.save(review);
 
-        List<DasiolReviewEntity> allReviews = reviewRepository.findByStoreStoreId(request.getStoreId());
+        List<DasiolReviewEntity> allReviews = reviewRepository.findByStore_StoreId(request.getStoreId());
         return allReviews.stream()
                 .map(e -> DasiolReviewResponseDTO.fromEntity(e))
                 .toList();

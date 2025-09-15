@@ -31,11 +31,11 @@ public class BookmarkEntity {
     private Integer bookmarkId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user")
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "store")
     private DasiolStoreEntity store;
 
 }

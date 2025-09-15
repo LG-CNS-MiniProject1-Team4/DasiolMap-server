@@ -55,12 +55,12 @@ public class DasiolStoreEntity {
     private Float avgRating;
 
     @Builder.Default
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<DasiolReviewEntity> reviews = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<StorePhotoEntity> photos = new ArrayList<>();
 
@@ -71,6 +71,6 @@ public class DasiolStoreEntity {
 
     @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "store_tags", joinColumns = @JoinColumn(name = "storeId"), inverseJoinColumns = @JoinColumn(name = "storeTagId"))
+    @JoinTable(name = "storeTag", joinColumns = @JoinColumn(name = "storeId"), inverseJoinColumns = @JoinColumn(name = "storeTagId"))
     private Set<StoreTagEntity> storeTags = new HashSet<>();
 }

@@ -10,8 +10,8 @@ import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity
 @Repository
 public interface DasiolStoreRepository extends JpaRepository<DasiolStoreEntity, Integer> {
 
-    public List<DasiolStoreEntity> findByStoreTagId(Integer tagId);
+    public List<DasiolStoreEntity> findByTags_TagId(Integer tagId);
 
-    public List<DasiolStoreEntity> findByStoreStoreTagId(Integer storeTagId);
+    public List<DasiolStoreEntity> findByStoreTags_StoreTagId(Integer storeTagId);
 
 }

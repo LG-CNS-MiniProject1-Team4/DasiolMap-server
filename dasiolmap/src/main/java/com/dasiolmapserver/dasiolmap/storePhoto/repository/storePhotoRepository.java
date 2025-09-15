@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
 
 @Repository
-public interface storePhotoRepository extends JpaRepository<StorePhotoEntity, Integer> {
+public interface StorePhotoRepository extends JpaRepository<StorePhotoEntity, Integer> {
 
-    public List<StorePhotoEntity> findByStoreStoreId(Integer storeId);
+    public List<StorePhotoEntity> findByStore_StoreId(Integer storeId);
 
-    public List<StorePhotoEntity> findByUserUserId(Integer userId);
+    public List<StorePhotoEntity> findByUser_UserId(Integer userId);
 
 }

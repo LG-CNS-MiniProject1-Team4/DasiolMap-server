@@ -3,6 +3,7 @@ package com.dasiolmapserver.dasiolmap.tag.domain.entity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Entity
 @Builder
 @Setter
 @Getter
@@ -32,7 +34,7 @@ public class TagEntity {
     private String tagName;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "store")
     private DasiolStoreEntity store;
 
 }

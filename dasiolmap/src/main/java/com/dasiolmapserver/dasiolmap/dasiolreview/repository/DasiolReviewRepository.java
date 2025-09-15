@@ -9,6 +9,6 @@ import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEnti
 
 @Repository
 public interface DasiolReviewRepository extends JpaRepository<DasiolReviewEntity, Integer> {
-    public List<DasiolReviewEntity> findByStoreStoreId(Integer storeId);
+    public List<DasiolReviewEntity> findByStore_StoreId(Integer storeId);
 
 }

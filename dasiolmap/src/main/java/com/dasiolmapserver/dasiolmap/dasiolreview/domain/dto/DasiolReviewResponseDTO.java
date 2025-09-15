@@ -19,12 +19,14 @@ public class DasiolReviewResponseDTO {
     private Integer reviewId;
     private String riview;
     private Integer storeId;
+    private Integer userId;
 
     public static DasiolReviewResponseDTO fromEntity(DasiolReviewEntity entity) {
         return DasiolReviewResponseDTO.builder()
                 .reviewId(entity.getReviewId())
                 .riview(entity.getReview())
                 .storeId(entity.getStore().getStoreId())
+                .userId(entity.getUser().getUserId())
                 .build();
     }
 

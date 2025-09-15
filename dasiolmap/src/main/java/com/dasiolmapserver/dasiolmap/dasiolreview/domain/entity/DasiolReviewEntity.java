@@ -1,6 +1,7 @@
 package com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity;
 
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
+import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
@@ -36,7 +37,12 @@ public class DasiolReviewEntity {
     private String review;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "store")
     @JsonManagedReference
     private DasiolStoreEntity store;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user")
+    @JsonManagedReference
+    private UserEntity user;
 }

@@ -33,15 +33,15 @@ public class StorePhotoEntity {
     private Integer storePhotoId; // 사진 PK
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "store")
     private DasiolStoreEntity store;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user")
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "reviewId")
+    @JoinColumn(name = "review")
     private DasiolReviewEntity review;
 
     @Column(nullable = false, length = 1000)
