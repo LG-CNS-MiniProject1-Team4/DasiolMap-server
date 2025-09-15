@@ -1,14 +1,16 @@
-package com.dasiolmapserver.dasiolmap.tags.ctrl;
+package com.dasiolmapserver.dasiolmap.tag.ctrl;
 
-import com.dasiolmapserver.dasiolmap.tags.domain.entity.Tag;
-import com.dasiolmapserver.dasiolmap.tags.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.dasiolmapserver.dasiolmap.tag.domain.dto.TagResponseDto;
+import com.dasiolmapserver.dasiolmap.tag.domain.entity.Tag;
+import com.dasiolmapserver.dasiolmap.tag.service.TagService;
+
 import java.util.List;
-import com.dasiolmapserver.dasiolmap.tags.domain.dto.TagResponseDto;
 
 
 @RestController

@@ -1,7 +1,8 @@
-package com.dasiolmapserver.dasiolmap.tags.repository;
+package com.dasiolmapserver.dasiolmap.tag.repository;
 
-import com.dasiolmapserver.dasiolmap.tags.domain.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.dasiolmapserver.dasiolmap.tag.domain.entity.Tag;
 
 public interface TagRepository extends JpaRepository<Tag, Long>{
     

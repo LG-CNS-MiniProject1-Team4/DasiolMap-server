@@ -1,4 +1,4 @@
-package com.dasiolmapserver.dasiolmap.tags.domain.entity;
+package com.dasiolmapserver.dasiolmap.tag.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

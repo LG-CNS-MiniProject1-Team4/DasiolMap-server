@@ -1,6 +1,7 @@
-package com.dasiolmapserver.dasiolmap.tags.domain.dto;
+package com.dasiolmapserver.dasiolmap.tag.domain.dto;
 
-import com.dasiolmapserver.dasiolmap.tags.domain.entity.Tag;
+import com.dasiolmapserver.dasiolmap.tag.domain.entity.Tag;
+
 import lombok.Getter;
 
 @Getter

@@ -1,12 +1,13 @@
 package com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity;
 
-import com.dasiolmapserver.dasiolmap.tags.domain.entity.Tag;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.dasiolmapserver.dasiolmap.tag.domain.entity.Tag;
 
 
 @Entity

@@ -1,12 +1,14 @@
-package com.dasiolmapserver.dasiolmap.tags.service;
+package com.dasiolmapserver.dasiolmap.tag.service;
 
-import com.dasiolmapserver.dasiolmap.tags.domain.entity.Tag;
-import com.dasiolmapserver.dasiolmap.tags.repository.TagRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.dasiolmapserver.dasiolmap.tag.domain.dto.TagResponseDto;
+import com.dasiolmapserver.dasiolmap.tag.domain.entity.Tag;
+import com.dasiolmapserver.dasiolmap.tag.repository.TagRepository;
+
 import java.util.List;
-import com.dasiolmapserver.dasiolmap.tags.domain.dto.TagResponseDto;
 import java.util.stream.Collectors;
 
 @Service
