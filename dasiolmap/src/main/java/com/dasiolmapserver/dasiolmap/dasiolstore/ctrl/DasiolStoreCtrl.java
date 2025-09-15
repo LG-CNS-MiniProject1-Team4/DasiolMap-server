@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +17,6 @@ import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreRequsetDT
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreResponseDTO;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.service.DasiolStoreService;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/v2/dasiolmap/store")
@@ -67,8 +66,8 @@ public class DasiolStoreCtrl {
 
     @PutMapping("/update/{storeId}")
     public ResponseEntity<Void> update(
-            @PathVariable("id") Integer storeId,
-            @org.springframework.web.bind.annotation.RequestBody DasiolStoreRequsetDTO request) {
+            @PathVariable("storeId") Integer storeId,
+            @RequestBody DasiolStoreRequsetDTO request) {
 
         System.out.println("[debug] >>> Store ctrl path PUT : /update ");
         System.out.println("[debug] >>> param is = " + storeId);

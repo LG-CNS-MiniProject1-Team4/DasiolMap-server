@@ -17,13 +17,13 @@ import lombok.ToString;
 @ToString
 public class DasiolReviewResponseDTO {
     private Integer reviewId;
-    private String riview;
+    private String review;
     private Integer storeId;
 
     public static DasiolReviewResponseDTO fromEntity(DasiolReviewEntity entity) {
         return DasiolReviewResponseDTO.builder()
                 .reviewId(entity.getReviewId())
-                .riview(entity.getReview())
+                .review(entity.getReview())
                 .storeId(entity.getStore().getStoreId())
                 .build();
     }

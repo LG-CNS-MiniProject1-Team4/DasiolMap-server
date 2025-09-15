@@ -23,13 +23,9 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(authz -> authz
-                .requestMatchers("/api/user/**", "/api/tags/**", "/api/stores/**").permitAll()
+                .requestMatchers("/api/v2/dasiolmap/user/**", "/api/v2/dasiolmap/store/**", "/api/v2/dasiolmap/search/**").permitAll()
             .anyRequest().authenticated()
             );
         return http.build();
     }
 }
-
-// .csrf(csrf -> csrf.disable())   // CSRF 보호 비활성화 (개발 초기 단계)
-// .anyRequest().authenticated() // 나머지 모든 경로는 인증 필요
-// .requestMatchers("/api/user/signup").permitAll() // '/api/user/signup' 경로는 인증 없이 허용
