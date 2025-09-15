@@ -55,12 +55,12 @@ public class DasiolStoreEntity {
     private Float avgRating;
 
     @Builder.Default
-    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<DasiolReviewEntity> reviews = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(mappedBy = "photo", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<StorePhotoEntity> photos = new ArrayList<>();
 

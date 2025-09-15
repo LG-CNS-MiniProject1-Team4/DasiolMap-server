@@ -11,6 +11,8 @@ import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEnti
 import com.dasiolmapserver.dasiolmap.dasiolreview.repository.DasiolReviewRepository;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
+import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
+import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 
 import jakarta.transaction.Transactional;
 
@@ -22,25 +24,29 @@ public class DasiolReviewService {
     @Autowired
     private DasiolStoreRepository storeRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+    
     @Transactional
     public List<DasiolReviewResponseDTO> insert(DasiolReviewRequsetDTO request) {
         System.out.println("[debug] >>> review service insert review ");
         DasiolStoreEntity store = storeRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new RuntimeException("가게가 존재하지 않습니다. ID=" + request.getStoreId()));
 
-        DasiolReviewEntity review = DasiolReviewEntity.builder()
-                .review(request.getReview())
-                .store(store)
-                .build();
+        UserEntity user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("사용자가 존재하지 않습니다. ID=" + request.getUserId()));
+
+        DasiolReviewEntity review = request.toEntity(store, user); // 👈 toEntity 호출 방식 변경
+
         store.getReviews().add(review);
+        user.getReviews().add(review);
 
         reviewRepository.save(review);
 
         List<DasiolReviewEntity> allReviews = reviewRepository.findByStoreStoreId(request.getStoreId());
         return allReviews.stream()
-                .map(e -> DasiolReviewResponseDTO.fromEntity(e))
+                .map(DasiolReviewResponseDTO::fromEntity)
                 .toList();
-
     }
 
     @Transactional

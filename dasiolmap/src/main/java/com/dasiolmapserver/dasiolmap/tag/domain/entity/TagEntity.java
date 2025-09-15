@@ -2,6 +2,7 @@ package com.dasiolmapserver.dasiolmap.tag.domain.entity;
 
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Entity
 @Builder
 @Setter
 @Getter
