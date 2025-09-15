@@ -1,15 +1,24 @@
 package com.dasiolmapserver.dasiolmap.dasiolstore.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewRequsetDTO;
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
+import com.dasiolmapserver.dasiolmap.dasiolreview.repository.DasiolReviewRepository;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreRequsetDTO;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreResponseDTO;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
-//import com.dasiolmapserver.dasiolmap.util.JwtProvider;
+import com.dasiolmapserver.dasiolmap.storeTag.domain.dto.StoreTagRequestDTO;
+import com.dasiolmapserver.dasiolmap.storeTag.domain.entity.StoreTagEntity;
+import com.dasiolmapserver.dasiolmap.storeTag.repository.StoreTagRepository;
+import com.dasiolmapserver.dasiolmap.tag.domain.dto.TagRequestDTO;
+import com.dasiolmapserver.dasiolmap.tag.repository.TagRepository;
+import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
 import jakarta.transaction.Transactional;
 
@@ -18,8 +27,14 @@ public class DasiolStoreService {
     @Autowired
     private DasiolStoreRepository dasiolStoreRepository;
 
-    // @Autowired
-    // private JwtProvider provider;
+    @Autowired
+    private StoreTagRepository storeTagRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
+
+    @Autowired
+    private JwtProvider provider;
 
     public List<DasiolStoreResponseDTO> select() {
         System.out.println("[debug] >>> store service select ");
@@ -58,16 +73,45 @@ public class DasiolStoreService {
     }
 
     @Transactional
-    public DasiolStoreEntity update(Integer storeId, DasiolStoreEntity request) {
+    public DasiolStoreEntity update(Integer storeId, DasiolStoreRequsetDTO request) {
         System.out.println("[debug] >>> store service update ");
-        request.setStoreId(storeId);
-        DasiolStoreEntity entity = dasiolStoreRepository.findById(request.getStoreId())
+        DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("가게 없음"));
 
         entity.setStoreName(request.getStoreName());
         entity.setAddress(request.getAddress());
         entity.setLocation(request.getLocation());
-
         return entity; // save() 호출 안 해도 @Transactional 이면 dirty checking으로 update 실행됨
+    }
+
+    @Transactional
+    public DasiolStoreEntity update(Integer storeId, StoreTagRequestDTO request) {
+        System.out.println("[debug] >>> store service update : StoreTag ");
+        DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
+                .orElseThrow(() -> new RuntimeException("가게 없음"));
+
+        entity.getStoreTags().add(storeTagRepository.findByStoreTagName(request.getStoreTagName()));
+
+        return entity;
+    }
+
+    @Transactional
+    public DasiolStoreEntity update(Integer storeId, TagRequestDTO request) {
+        System.out.println("[debug] >>> store service update : Tag");
+        DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
+                .orElseThrow(() -> new RuntimeException("가게 없음"));
+
+        entity.getTags().add(tagRepository.findByTagName(request.getTagName()));
+
+        return entity;
+    }
+
+    @Transactional
+    public DasiolStoreEntity update(Integer storeId, DasiolReviewRequsetDTO request) {
+        System.out.println("[debug] >>> store service update ");
+        DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
+                .orElseThrow(() -> new RuntimeException("가게 없음"));
+        entity.getReviews().add(request.toEntity(entity));
+        return entity;
     }
 }

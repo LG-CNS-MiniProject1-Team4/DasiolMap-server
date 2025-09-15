@@ -7,7 +7,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootApplication
 public class DasiolmapApplication {
-
 	public static void main(String[] args) {
 
 		Dotenv env = Dotenv.configure().directory("dasiolmap").ignoreIfMissing().load();
@@ -16,5 +15,4 @@ public class DasiolmapApplication {
 
 		SpringApplication.run(DasiolmapApplication.class, args);
 	}
-
 }

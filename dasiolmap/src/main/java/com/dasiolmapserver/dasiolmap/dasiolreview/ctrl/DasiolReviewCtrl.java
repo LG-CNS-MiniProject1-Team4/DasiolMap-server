@@ -19,7 +19,6 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/api/v2/dasiolmap/store/review")
-
 public class DasiolReviewCtrl {
 
     @Autowired
@@ -29,12 +28,12 @@ public class DasiolReviewCtrl {
     public ResponseEntity<List<DasiolReviewResponseDTO>> register(
             @RequestBody DasiolReviewRequsetDTO request) {
 
-        System.out.println("[debug] >>> store comment ctrl path POST : /register ");
+        System.out.println("[debug] >>> store review ctrl path POST : /register ");
         System.out.println("[debug] param dto = " + request);
 
-        List<DasiolReviewResponseDTO> comments = reviewService.insert(request);
-        if (comments.size() != 0) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(comments);
+        List<DasiolReviewResponseDTO> reviews = reviewService.insert(request);
+        if (reviews.size() != 0) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(reviews);
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }

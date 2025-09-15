@@ -12,12 +12,13 @@ import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtProvider {
-
     @Value("${jwt.secret}")
     private String secret;
 
     private Key getStringKey() {
-        System.out.println("[debug] JwtProvider secret : " + secret);
+
+        System.out.println("[debug] >>> JwtProvider secret : " + secret);
+
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
@@ -29,6 +30,7 @@ public class JwtProvider {
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getStringKey())
                 .compact();
+
     }
 
     public String generateRefreshToken(String email) {

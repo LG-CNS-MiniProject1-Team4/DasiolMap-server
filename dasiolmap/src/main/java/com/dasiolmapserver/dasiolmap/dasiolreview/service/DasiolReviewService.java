@@ -9,7 +9,6 @@ import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewRequset
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewResponseDTO;
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
 import com.dasiolmapserver.dasiolmap.dasiolreview.repository.DasiolReviewRepository;
-import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreRequsetDTO;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
 
@@ -25,9 +24,9 @@ public class DasiolReviewService {
 
     @Transactional
     public List<DasiolReviewResponseDTO> insert(DasiolReviewRequsetDTO request) {
-        System.out.println("[debug] >>> comment service insert comment ");
+        System.out.println("[debug] >>> review service insert review ");
         DasiolStoreEntity store = storeRepository.findById(request.getStoreId())
-                .orElseThrow(() -> new RuntimeException("블로그가 존재하지 않습니다. ID=" + request.getStoreId()));
+                .orElseThrow(() -> new RuntimeException("가게가 존재하지 않습니다. ID=" + request.getStoreId()));
 
         DasiolReviewEntity review = DasiolReviewEntity.builder()
                 .review(request.getReview())
@@ -37,8 +36,8 @@ public class DasiolReviewService {
 
         reviewRepository.save(review);
 
-        List<DasiolReviewEntity> allComments = reviewRepository.findByStore_StoreId(request.getStoreId());
-        return allComments.stream()
+        List<DasiolReviewEntity> allReviews = reviewRepository.findByStoreStoreId(request.getStoreId());
+        return allReviews.stream()
                 .map(e -> DasiolReviewResponseDTO.fromEntity(e))
                 .toList();
 
