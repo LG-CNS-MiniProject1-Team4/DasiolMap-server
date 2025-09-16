@@ -12,10 +12,8 @@ import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity
 @Repository
 public interface DasiolStoreRepository extends JpaRepository<DasiolStoreEntity, Integer> {
 
-    @Query("SELECT s FROM DasiolStoreEntity s JOIN s.tags t WHERE t.tagId = :tagId")
-    public List<DasiolStoreEntity> findByTagId(@Param("tagId") Integer tagId);
+    public List<DasiolStoreEntity> findByTags_TagId(Integer tagId);
 
-    @Query("SELECT s FROM DasiolStoreEntity s JOIN s.storeTags st WHERE st.storeTagId = :storeTagId")
-    public List<DasiolStoreEntity> findByStoreTagId(@Param("storeTagId") Integer storeTagId);
+    public List<DasiolStoreEntity> findByStoreTags_StoreTagId(Integer storeTagId);
 
 }

@@ -18,13 +18,13 @@ import lombok.ToString;
 public class BookmarkResponseDTO {
     private Integer bookmarksId;
     private Integer storeId;
-    private Integer userId;
+    private String userEmail;
 
     public static BookmarkResponseDTO fromEntity(BookmarkEntity bookmark) {
         return BookmarkResponseDTO.builder()
                 .bookmarksId(bookmark.getBookmarkId())
                 .storeId(bookmark.getStore().getStoreId())
-                .userId(bookmark.getUser().getUserId())
+                .userEmail(bookmark.getUser().getEmail())
                 .build();
     }
 

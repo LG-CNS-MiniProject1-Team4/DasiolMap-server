@@ -101,5 +101,8 @@ public class JwtFilter implements Filter {
                 path.startsWith("/api/v2/dasiolmap/user/") ||
                 path.startsWith("/api/v2/dasiolmap/store") || // store 관련 API는 모두 허용
                 path.startsWith("/api/v2/dasiolmap/search/"); // search 관련 API는 모두 허용
+                path.startsWith("/api/v2/dasiolmap/user/signup") ||
+                path.startsWith("/api/v2/dasiolmap/user/login");
+
     }
 }

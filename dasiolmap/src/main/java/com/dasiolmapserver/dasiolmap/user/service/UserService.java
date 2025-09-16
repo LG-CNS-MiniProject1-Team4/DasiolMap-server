@@ -12,6 +12,9 @@ import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
 import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
+
 @Service
 public class UserService {
 
@@ -45,5 +48,22 @@ public class UserService {
         map.put("refresh", refToken);
         return map;
 
+    }
+
+    public UserResponseDTO update(String email, UserRequestDTO request) {
+        System.out.println(">>> service updateUser");
+
+        UserEntity user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("유저 없음"));
+
+        if (request.getNickname() != null && request.getPasswd() != null) {
+            user.setNickname(request.getNickname());
+            user.setPasswd(request.getPasswd());
+            System.out.println("update success/ nickname: " + user.getNickname() + ", passwd: " + user.getPasswd());
+        }
+
+        UserEntity updated = userRepository.save(user);
+
+        return UserResponseDTO.fromEntity(updated);
     }
 }

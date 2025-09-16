@@ -1,0 +1,210 @@
+2025-09-15 14:23:14.001509+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT @[*]@character_set_database, @@sql_mode"; expected "identifier"; SQL statement:
+SELECT @@character_set_database, @@sql_mode [42001-232]
+2025-09-15 14:23:14.938625+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table bookmark_entity (\000d\000a        bookmark_id integer not null auto_increment,\000d\000a        store integer not null,\000d\000a        [*]user integer not null,\000d\000a        primary key (bookmark_id)\000d\000a    ) engine=InnoDB"; expected "identifier"; SQL statement:
+
+    create table bookmark_entity (
+        bookmark_id integer not null auto_increment,
+        store integer not null,
+        user integer not null,
+        primary key (bookmark_id)
+    ) engine=InnoDB [42001-232]
+2025-09-15 14:23:14.947359+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table dasiol_review_entity (\000d\000a        review_id integer not null auto_increment,\000d\000a        review varchar(500) not null,\000d\000a        store integer not null,\000d\000a        [*]user integer not null,\000d\000a        primary key (review_id)\000d\000a    ) engine=InnoDB"; expected "identifier"; SQL statement:
+
+    create table dasiol_review_entity (
+        review_id integer not null auto_increment,
+        review varchar(500) not null,
+        store integer not null,
+        user integer not null,
+        primary key (review_id)
+    ) engine=InnoDB [42001-232]
+2025-09-15 14:23:14.951444+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table dasiol_store_entity (\000d\000a        store_id integer not null auto_increment,\000d\000a        address varchar(150) not null,\000d\000a        avg_rating float(23),\000d\000a        location varchar(150) not null,\000d\000a        store_name varchar(10) not null,\000d\000a        primary key (store_id)\000d\000a    ) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+
+    create table dasiol_store_entity (
+        store_id integer not null auto_increment,
+        address varchar(150) not null,
+        avg_rating float(23),
+        location varchar(150) not null,
+        store_name varchar(10) not null,
+        primary key (store_id)
+    ) engine=InnoDB [42001-232]
+2025-09-15 14:23:14.955958+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table store_photo_entity (\000d\000a        store_photo_id integer not null auto_increment,\000d\000a        photo_url varchar(1000) not null,\000d\000a        review integer not null,\000d\000a        store integer not null,\000d\000a        [*]user integer not null,\000d\000a        primary key (store_photo_id)\000d\000a    ) engine=InnoDB"; expected "identifier"; SQL statement:
+
+    create table store_photo_entity (
+        store_photo_id integer not null auto_increment,
+        photo_url varchar(1000) not null,
+        review integer not null,
+        store integer not null,
+        user integer not null,
+        primary key (store_photo_id)
+    ) engine=InnoDB [42001-232]
+2025-09-15 14:23:14.961932+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table store_tag (\000d\000a        store_id integer not null,\000d\000a        store_tag_id integer not null,\000d\000a        primary key (store_id, store_tag_id)\000d\000a    ) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+
+    create table store_tag (
+        store_id integer not null,
+        store_tag_id integer not null,
+        primary key (store_id, store_tag_id)
+    ) engine=InnoDB [42001-232]
+2025-09-15 14:23:14.965670+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table store_tag_entity (\000d\000a        store_tag_id integer not null auto_increment,\000d\000a        store_tag_name varchar(255) not null,\000d\000a        store_id integer not null,\000d\000a        primary key (store_tag_id)\000d\000a    ) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+
+    create table store_tag_entity (
+        store_tag_id integer not null auto_increment,
+        store_tag_name varchar(255) not null,
+        store_id integer not null,
+        primary key (store_tag_id)
+    ) engine=InnoDB [42001-232]
+2025-09-15 14:23:14.970502+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table tag (\000d\000a        store_id integer not null,\000d\000a        tag_id integer not null,\000d\000a        primary key (store_id, tag_id)\000d\000a    ) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+
+    create table tag (
+        store_id integer not null,
+        tag_id integer not null,
+        primary key (store_id, tag_id)
+    ) engine=InnoDB [42001-232]
+2025-09-15 14:23:14.975571+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table tag_entity (\000d\000a        tag_id integer not null auto_increment,\000d\000a        tag_name varchar(255) not null,\000d\000a        store integer not null,\000d\000a        primary key (tag_id)\000d\000a    ) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+
+    create table tag_entity (
+        tag_id integer not null auto_increment,
+        tag_name varchar(255) not null,
+        store integer not null,
+        primary key (tag_id)
+    ) engine=InnoDB [42001-232]
+2025-09-15 14:23:14.979365+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    create table user_entity (\000d\000a        user_id integer not null auto_increment,\000d\000a        created_at datetime(6),\000d\000a        email varchar(255) not null,\000d\000a        nickname varchar(255) not null,\000d\000a        passwd varchar(255) not null,\000d\000a        primary key (user_id)\000d\000a    ) engine[*]=InnoDB"; expected "identifier"; SQL statement:
+
+    create table user_entity (
+        user_id integer not null auto_increment,
+        created_at datetime(6),
+        email varchar(255) not null,
+        nickname varchar(255) not null,
+        passwd varchar(255) not null,
+        primary key (user_id)
+    ) engine=InnoDB [42001-232]
+2025-09-15 14:23:14.983363+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STORE_TAG_ENTITY" not found (this database is empty); SQL statement:
+
+    alter table store_tag_entity 
+       drop index if exists UK62ue71li6hy75mu2n06ny7p6r [42104-232]
+2025-09-15 14:23:14.984358+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STORE_TAG_ENTITY" not found; SQL statement:
+
+    alter table store_tag_entity 
+       add constraint UK62ue71li6hy75mu2n06ny7p6r unique (store_tag [42102-232]
+2025-09-15 14:23:14.984358+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TAG_ENTITY" not found (this database is empty); SQL statement:
+
+    alter table tag_entity 
+       drop index if exists UKehn489ercgr0b7293mhuhr4wi [42104-232]
+2025-09-15 14:23:14.985622+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TAG_ENTITY" not found; SQL statement:
+
+    alter table tag_entity 
+       add constraint UKehn489ercgr0b7293mhuhr4wi unique (tag [42102-232]
+2025-09-15 14:23:14.986626+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER_ENTITY" not found (this database is empty); SQL statement:
+
+    alter table user_entity 
+       drop index if exists UK4xad1enskw4j1t2866f7sodrx [42104-232]
+2025-09-15 14:23:14.986626+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER_ENTITY" not found; SQL statement:
+
+    alter table user_entity 
+       add constraint UK4xad1enskw4j1t2866f7sodrx unique ( [42102-232]
+2025-09-15 14:23:14.987625+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "BOOKMARK_ENTITY" not found; SQL statement:
+
+    alter table bookmark_entity 
+       add constraint FKpjih84um9ndur5thqknxpt60h 
+       foreign key (store) 
+       references dasiol_store_entity (sto [42102-232]
+2025-09-15 14:23:14.990989+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    alter table bookmark_entity \000d\000a       add constraint FKponthwsx4mbia2nb2u1cv8ubw \000d\000a       foreign key ([*]user) \000d\000a       references user_entity (user_id)"; expected "identifier"; SQL statement:
+
+    alter table bookmark_entity 
+       add constraint FKponthwsx4mbia2nb2u1cv8ubw 
+       foreign key (user) 
+       references user_entity (user_id) [42001-232]
+2025-09-15 14:23:14.993988+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "DASIOL_REVIEW_ENTITY" not found; SQL statement:
+
+    alter table dasiol_review_entity 
+       add constraint FK3msvsdtff2v3x5691wyp7n4kg 
+       foreign key (store) 
+       references dasiol_store_entity (sto [42102-232]
+2025-09-15 14:23:14.995988+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    alter table dasiol_review_entity \000d\000a       add constraint FKtc5ersssivt7qldmcyk7q5db \000d\000a       foreign key ([*]user) \000d\000a       references user_entity (user_id)"; expected "identifier"; SQL statement:
+
+    alter table dasiol_review_entity 
+       add constraint FKtc5ersssivt7qldmcyk7q5db 
+       foreign key (user) 
+       references user_entity (user_id) [42001-232]
+2025-09-15 14:23:14.998496+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STORE_PHOTO_ENTITY" not found; SQL statement:
+
+    alter table store_photo_entity 
+       add constraint FKateihhsokugt4oe58aqpdvko9 
+       foreign key (review) 
+       references dasiol_review_entity (revi [42102-232]
+2025-09-15 14:23:15.000495+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STORE_PHOTO_ENTITY" not found; SQL statement:
+
+    alter table store_photo_entity 
+       add constraint FKdal0i2hbil6082p6nlsm4qbw8 
+       foreign key (store) 
+       references dasiol_store_entity (sto [42102-232]
+2025-09-15 14:23:15.002500+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "\000d\000a    alter table store_photo_entity \000d\000a       add constraint FK7kxc0uf86rbbp07k595xasjuy \000d\000a       foreign key ([*]user) \000d\000a       references user_entity (user_id)"; expected "identifier"; SQL statement:
+
+    alter table store_photo_entity 
+       add constraint FK7kxc0uf86rbbp07k595xasjuy 
+       foreign key (user) 
+       references user_entity (user_id) [42001-232]
+2025-09-15 14:23:15.005497+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STORE_TAG" not found; SQL statement:
+
+    alter table store_tag 
+       add constraint FK6sa4dejomyyjena5gup37xhut 
+       foreign key (store_tag_id) 
+       references store_tag_entity (store_t [42102-232]
+2025-09-15 14:23:15.007497+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STORE_TAG" not found; SQL statement:
+
+    alter table store_tag 
+       add constraint FKdkvqb6tn1s1um45bboy1ikobj 
+       foreign key (store_id) 
+       references dasiol_store_entity (sto [42102-232]
+2025-09-15 14:23:15.010848+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "STORE_TAG_ENTITY" not found; SQL statement:
+
+    alter table store_tag_entity 
+       add constraint FKakdr9k1hp9wjji8kj5gjqdgtq 
+       foreign key (store_id) 
+       references dasiol_store_entity (sto [42102-232]
+2025-09-15 14:23:15.012848+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TAG" not found; SQL statement:
+
+    alter table tag 
+       add constraint FKkcthxfwc30dhv9rc978bsl5gm 
+       foreign key (tag_id) 
+       references tag_entity (t [42102-232]
+2025-09-15 14:23:15.014850+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TAG" not found; SQL statement:
+
+    alter table tag 
+       add constraint FKnahk6aces78p8y1bx4b8pf268 
+       foreign key (store_id) 
+       references dasiol_store_entity (sto [42102-232]
+2025-09-15 14:23:15.017351+09:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TAG_ENTITY" not found; SQL statement:
+
+    alter table tag_entity 
+       add constraint FKpcp964mapodfs9u97gyu9oujl 
+       foreign key (store) 
+       references dasiol_store_entity (sto [42102-232]

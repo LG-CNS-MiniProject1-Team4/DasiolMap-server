@@ -1,8 +1,11 @@
 package com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto;
 
+import java.util.List;
+
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
+import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,17 +20,20 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DasiolReviewRequsetDTO {
+public class DasiolReviewRequestDTO {
     private String review;
-    private Integer rating; //  Postman의 rating 값을 받습니다.
+    private float rating;
     private Integer storeId;
     private Integer userId;
+
+    private List<StorePhotoEntity> photos;
 
     public DasiolReviewEntity toEntity(DasiolStoreEntity store, UserEntity user) {
         return DasiolReviewEntity.builder()
                 .review(this.review)
                 .rating(this.rating) // 받은 rating 값을 Entity로 넘겨줍니다.
                 .store(store)
+                .photos(this.photos)
                 .user(user)
                 .build();
     }

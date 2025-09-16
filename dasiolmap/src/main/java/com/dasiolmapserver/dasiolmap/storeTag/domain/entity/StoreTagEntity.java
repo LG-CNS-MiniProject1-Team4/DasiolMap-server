@@ -33,6 +33,6 @@ public class StoreTagEntity {
     private String storeTagName;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "storeId")
+    @JoinColumn(name = "store")
     private DasiolStoreEntity store;
 }

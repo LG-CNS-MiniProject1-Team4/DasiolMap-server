@@ -61,5 +61,4 @@ public class UserCtrl {
                 .header("Refresh-Token", (String) (map.get("refresh")))
                 .body((UserResponseDTO) map.get("response"));
     }
-
 }
