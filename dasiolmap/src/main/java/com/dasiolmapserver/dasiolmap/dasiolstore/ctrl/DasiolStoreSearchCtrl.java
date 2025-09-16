@@ -21,4 +21,9 @@ public class DasiolStoreSearchCtrl {
     public ResponseEntity<List<DasiolStoreResponseDTO>> searchStores(@RequestParam String keyword) {
         return ResponseEntity.ok(searchService.searchStores(keyword));
     }
+
+    @GetMapping("/stores/by-rating")
+    public ResponseEntity<List<DasiolStoreResponseDTO>> getStoresOrderByAvgRating() {
+        return ResponseEntity.ok(searchService.findStoresOrderByAvgRatingDesc());
+    }
 }

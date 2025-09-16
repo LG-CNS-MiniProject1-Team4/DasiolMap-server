@@ -32,4 +32,7 @@ public class DasiolStoreDocument {
 
     @Field(type = FieldType.Text, name = "location")
     private String location;
+
+    @Field(type = FieldType.Float, name = "avgRating")
+    private Float avgRating;
 }

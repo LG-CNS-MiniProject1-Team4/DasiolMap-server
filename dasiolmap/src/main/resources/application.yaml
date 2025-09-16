@@ -28,7 +28,7 @@ spring:
     hibernate:
       # create, create-drop, update, none
 
-      ddl-auto: create
+      ddl-auto: update
 
     # 콘솔출력
     show-sql: true

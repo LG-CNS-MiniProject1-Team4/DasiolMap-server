@@ -65,14 +65,9 @@ public class DasiolStoreService {
                 .toList();
     }
 
-    public DasiolStoreResponseDTO insert(DasiolStoreRequsetDTO request) {
+     public DasiolStoreResponseDTO insert(DasiolStoreRequsetDTO request) {
         System.out.println("[debug] >>> store service insert ");
-        DasiolStoreEntity store = dasiolStoreRepository.save(DasiolStoreEntity.builder()
-                .storeName(request.getStoreName())
-                .address(request.getAddress())
-                .location(request.getLocation())
-                .build());
-
+        DasiolStoreEntity store = dasiolStoreRepository.save(request.toEntity());
         return DasiolStoreResponseDTO.fromEntity(store);
     }
 
@@ -147,6 +142,7 @@ public class DasiolStoreService {
                     .storeName(store.getStoreName())
                     .address(store.getAddress())
                     .location(store.getLocation())
+                    .avgRating(store.getAvgRating())
                     .build();
             dasiolStoreSearchRepository.save(document);
         }

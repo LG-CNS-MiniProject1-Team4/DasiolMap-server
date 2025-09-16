@@ -36,6 +36,9 @@ public class DasiolReviewEntity {
     @Column(nullable = false, length = 500)
     private String review;
 
+    @Column(nullable = false)
+    private Integer rating; // 1~5점 사이의 별점
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "storeId")
     @JsonManagedReference

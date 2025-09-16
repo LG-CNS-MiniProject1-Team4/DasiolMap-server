@@ -19,14 +19,16 @@ import lombok.ToString;
 @ToString
 public class DasiolReviewRequsetDTO {
     private String review;
+    private Integer rating; //  Postman의 rating 값을 받습니다.
     private Integer storeId;
     private Integer userId;
 
     public DasiolReviewEntity toEntity(DasiolStoreEntity store, UserEntity user) {
         return DasiolReviewEntity.builder()
                 .review(this.review)
+                .rating(this.rating) // 받은 rating 값을 Entity로 넘겨줍니다.
                 .store(store)
-                .user(user) 
+                .user(user)
                 .build();
     }
 

@@ -56,9 +56,10 @@ public class JwtFilter implements Filter {
             chain.doFilter(request, response);
             return;
         }
-
-        if (isPath(path)) {
-            System.out.println(">>> 인증/인가 없이 필터 통과");
+        
+        // isPath 메서드가 true를 반환하면 토큰 검사 없이 통과시킵니다.
+        if (isPath(path, method)) {
+            System.out.println(">>> 인증/인가 없이 필터 통과: " + path);
             chain.doFilter(request, response);
             return;
         }
@@ -86,15 +87,19 @@ public class JwtFilter implements Filter {
         } catch (Exception e) {
             System.out.println(">>>>>> 검증 실패 -> ");
             e.printStackTrace();
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 👈 검증 실패 시에도 401 상태를 명확히 반환
             return;
         }
 
     }
 
     // 특정 endpoint 에 대해서는 인가없이 컨트롤러 이동이 가능하도록
-    public boolean isPath(String path) {
+    // SecurityConfig와 유사하게 공개할 경로를 설정합니다.
+    public boolean isPath(String path, String method) {
         return path.startsWith("/swagger-ui") ||
-                path.startsWith("/v3/api-docs");
-
+                path.startsWith("/v3/api-docs") ||
+                path.startsWith("/api/v2/dasiolmap/user/") ||
+                path.startsWith("/api/v2/dasiolmap/store") || // store 관련 API는 모두 허용
+                path.startsWith("/api/v2/dasiolmap/search/"); // search 관련 API는 모두 허용
     }
 }
