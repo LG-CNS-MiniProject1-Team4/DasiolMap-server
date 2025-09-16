@@ -15,9 +15,6 @@ import com.dasiolmapserver.dasiolmap.storePhoto.domain.dto.StorePhotoResponseDTO
 import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
 import com.dasiolmapserver.dasiolmap.storePhoto.repository.StorePhotoRepository;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import jakarta.validation.Valid;
-
 @Service
 public class StorePhotoService {
         @Autowired
@@ -29,7 +26,7 @@ public class StorePhotoService {
         @Autowired
         private StorePhotoRepository StorePhotoRepository;
 
-        public List<StorePhotoResponseDTO> insert(@RequestBody @Valid StorePhotoRequestDTO request) {
+        public List<StorePhotoResponseDTO> insert(StorePhotoRequestDTO request) {
                 System.out.println("[debug] >>> storePhoto service insert ");
 
                 // 스토어 엔티티 조회

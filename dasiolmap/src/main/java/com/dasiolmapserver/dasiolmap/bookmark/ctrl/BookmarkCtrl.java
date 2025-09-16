@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.dasiolmapserver.dasiolmap.bookmark.domain.dto.BookmarkRequestDTO;
 import com.dasiolmapserver.dasiolmap.bookmark.domain.dto.BookmarkResponseDTO;
 import com.dasiolmapserver.dasiolmap.bookmark.service.BookmarkService;
 
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 

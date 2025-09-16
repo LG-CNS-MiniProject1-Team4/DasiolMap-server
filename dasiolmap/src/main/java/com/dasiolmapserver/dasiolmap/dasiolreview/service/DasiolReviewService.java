@@ -12,9 +12,7 @@ import com.dasiolmapserver.dasiolmap.dasiolreview.repository.DasiolReviewReposit
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 
 @Service
 public class DasiolReviewService {
@@ -25,7 +23,7 @@ public class DasiolReviewService {
     private DasiolStoreRepository storeRepository;
 
     @Transactional
-    public List<DasiolReviewResponseDTO> insert(@RequestBody @Valid DasiolReviewRequestDTO request) {
+    public List<DasiolReviewResponseDTO> insert(DasiolReviewRequestDTO request) {
         System.out.println("[debug] >>> review service insert review ");
         DasiolStoreEntity store = storeRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new RuntimeException("가게가 존재하지 않습니다. ID=" + request.getStoreId()));
@@ -45,7 +43,7 @@ public class DasiolReviewService {
     }
 
     @Transactional
-    public DasiolReviewEntity update(Integer reviewId, @RequestBody @Valid DasiolReviewRequestDTO request) {
+    public DasiolReviewEntity update(Integer reviewId, DasiolReviewRequestDTO request) {
         System.out.println("[debug] >>> review service update ");
         DasiolReviewEntity entity = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new RuntimeException("가게 없음"));

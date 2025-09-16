@@ -23,7 +23,7 @@ public class UserService {
     @Autowired
     private JwtProvider provider;
 
-    public UserResponseDTO signup(@RequestBody @Valid UserRequestDTO request) {
+    public UserResponseDTO signup(UserRequestDTO request) {
         System.out.println(">>> service signup");
         UserEntity entity = userRepository.save(request.toEntity());
         System.out.println(">>> after save: " + entity);
@@ -34,7 +34,7 @@ public class UserService {
         return dto;
     }
 
-    public Map<String, Object> login(@RequestBody @Valid UserRequestDTO request) {
+    public Map<String, Object> login(UserRequestDTO request) {
         System.out.println(">>> service login");
         UserEntity entity = userRepository.findByEmailAndPasswd(request.getEmail(), request.getPasswd());
 

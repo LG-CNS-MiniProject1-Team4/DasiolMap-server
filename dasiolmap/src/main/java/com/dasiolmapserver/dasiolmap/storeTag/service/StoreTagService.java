@@ -14,9 +14,6 @@ import com.dasiolmapserver.dasiolmap.storeTag.domain.dto.StoreTagResponseDTO;
 import com.dasiolmapserver.dasiolmap.storeTag.domain.entity.StoreTagEntity;
 import com.dasiolmapserver.dasiolmap.storeTag.repository.StoreTagRepository;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import jakarta.validation.Valid;
-
 @Service
 public class StoreTagService {
     @Autowired
@@ -25,7 +22,7 @@ public class StoreTagService {
     @Autowired
     private DasiolStoreRepository dasiolStoreRepository;
 
-    public List<StoreTagResponseDTO> insert(@RequestBody @Valid StoreTagRequestDTO request) {
+    public List<StoreTagResponseDTO> insert(StoreTagRequestDTO request) {
         System.out.println("[debug] >>> storeTag service insert ");
 
         // 스토어 엔티티 조회
