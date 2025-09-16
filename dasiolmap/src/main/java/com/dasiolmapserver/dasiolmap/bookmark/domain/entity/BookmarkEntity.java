@@ -2,6 +2,7 @@ package com.dasiolmapserver.dasiolmap.bookmark.domain.entity;
 
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,11 +32,13 @@ public class BookmarkEntity {
     private Integer bookmarkId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "userEmail", referencedColumnName = "email")
+    @JsonManagedReference
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "store")
+    @JsonManagedReference
     private DasiolStoreEntity store;
 
 }

@@ -40,7 +40,6 @@ public class DasiolReviewService {
         return allReviews.stream()
                 .map(e -> DasiolReviewResponseDTO.fromEntity(e))
                 .toList();
-
     }
 
     @Transactional
@@ -48,7 +47,12 @@ public class DasiolReviewService {
         System.out.println("[debug] >>> review service update ");
         DasiolReviewEntity entity = reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new RuntimeException("가게 없음"));
-        entity.setReview(request.getReview());
+        if (request.getReview() != null) {
+            entity.setReview(request.getReview());
+        }
+        if (request.getPhotos() != null) {
+            entity.setPhotos(request.getPhotos());
+        }
 
         return entity; // save() 호출 안 해도 @Transactional 이면 dirty checking으로 update 실행됨
     }

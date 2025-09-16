@@ -8,12 +8,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewRequsetDTO;
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewResponseDTO;
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
 import com.dasiolmapserver.dasiolmap.dasiolreview.service.DasiolReviewService;
+import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreRequsetDTO;
+import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
@@ -34,6 +38,23 @@ public class DasiolReviewCtrl {
         List<DasiolReviewResponseDTO> reviews = reviewService.insert(request);
         if (reviews.size() != 0) {
             return ResponseEntity.status(HttpStatus.CREATED).body(reviews);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @PutMapping("/update/{storeId}/{reviewId}")
+    public ResponseEntity<Void> update(
+            @PathVariable("id") Integer reviewId,
+            @org.springframework.web.bind.annotation.RequestBody DasiolReviewRequsetDTO request) {
+
+        System.out.println("[debug] >>> review ctrl path PUT : /update ");
+        System.out.println("[debug] >>> param is = " + reviewId);
+        System.out.println("[debug] >>> param dto = " + request);
+
+        DasiolReviewEntity result = reviewService.update(reviewId, request);
+        if (result != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(null);
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }

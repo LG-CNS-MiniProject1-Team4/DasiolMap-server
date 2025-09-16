@@ -9,6 +9,7 @@ import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEnti
 import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
 import com.dasiolmapserver.dasiolmap.storeTag.domain.entity.StoreTagEntity;
 import com.dasiolmapserver.dasiolmap.tag.domain.entity.TagEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -67,10 +68,12 @@ public class DasiolStoreEntity {
     @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tag", joinColumns = @JoinColumn(name = "storeId"), inverseJoinColumns = @JoinColumn(name = "tagId"))
+    @JsonBackReference
     private Set<TagEntity> tags = new HashSet<>();
 
     @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "storeTag", joinColumns = @JoinColumn(name = "storeId"), inverseJoinColumns = @JoinColumn(name = "storeTagId"))
+    @JsonBackReference
     private Set<StoreTagEntity> storeTags = new HashSet<>();
 }

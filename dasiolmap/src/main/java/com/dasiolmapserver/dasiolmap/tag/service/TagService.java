@@ -1,10 +1,14 @@
 package com.dasiolmapserver.dasiolmap.tag.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
+
 import com.dasiolmapserver.dasiolmap.tag.domain.dto.TagRequestDTO;
 import com.dasiolmapserver.dasiolmap.tag.domain.dto.TagResponseDTO;
 import com.dasiolmapserver.dasiolmap.tag.domain.entity.TagEntity;
@@ -18,7 +22,7 @@ public class TagService {
     @Autowired
     private DasiolStoreRepository dasiolStoreRepository;
 
-    public TagResponseDTO insert(TagRequestDTO request) {
+    public List<TagResponseDTO> insert(TagRequestDTO request) {
         System.out.println("[debug] >>> Tag service insert ");
 
         // 스토어 엔티티 조회
@@ -30,7 +34,13 @@ public class TagService {
                 .tagName(request.getTagName())
                 .build());
 
-        return TagResponseDTO.fromEntity(tag);
+        store.getTags().add(tag);
+        tagRepository.save(tag);
+
+        Optional<TagEntity> allTags = tagRepository.findByStore_StoreId(request.getStoreId());
+        return allTags.stream()
+                .map(e -> TagResponseDTO.fromEntity(e))
+                .toList();
     }
 
     public void delete(Integer storeId, Integer tagId) {

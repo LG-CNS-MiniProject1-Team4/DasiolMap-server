@@ -12,6 +12,8 @@ import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
 import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class UserService {
 
@@ -45,5 +47,20 @@ public class UserService {
         map.put("refresh", refToken);
         return map;
 
+    }
+
+    @Transactional
+    public UserEntity update(String userEmail, UserRequestDTO request) {
+        System.out.println("[debug] >>> store service update ");
+        UserEntity entity = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new RuntimeException("유저 없음"));
+
+        if (request.getNickname() != null) {
+            entity.setNickname(request.getNickname());
+        }
+        if (request.getPasswd() != null) {
+            entity.setPasswd(request.getPasswd());
+        }
+        return entity;
     }
 }

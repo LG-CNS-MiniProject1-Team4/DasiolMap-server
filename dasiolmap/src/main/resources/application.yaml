@@ -27,7 +27,7 @@ spring:
   jpa:
     hibernate:
       # create, create-drop, update, none
-      ddl-auto: create-drop
+      ddl-auto: update
 
     # 콘솔출력
     show-sql: true
@@ -48,8 +48,8 @@ server:
 
  # token
 jwt:
-  #secret: jslim-super-secret-key-for-jwt-123456789
   secret: ${JWT_SECRET_KEY}
+  #secret: jslim-super-secret-key-for-jwt-123456789
 
 # openApi:
   serviceKey: ${SERVICE_KEY}

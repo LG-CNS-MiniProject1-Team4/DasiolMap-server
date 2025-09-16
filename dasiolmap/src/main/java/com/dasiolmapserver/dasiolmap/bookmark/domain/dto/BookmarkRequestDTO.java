@@ -19,7 +19,7 @@ import lombok.ToString;
 @ToString
 public class BookmarkRequestDTO {
     private Integer storeId;
-    private Integer userId;
+    private String userEmail;
 
     public BookmarkEntity toEntity(DasiolStoreEntity store, UserEntity user) {
         return BookmarkEntity.builder()
