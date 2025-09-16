@@ -15,53 +15,57 @@ import com.dasiolmapserver.dasiolmap.storePhoto.domain.dto.StorePhotoResponseDTO
 import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
 import com.dasiolmapserver.dasiolmap.storePhoto.repository.StorePhotoRepository;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
+
 @Service
 public class StorePhotoService {
-    @Autowired
-    private DasiolReviewRepository dasiolReviewRepository;
+        @Autowired
+        private DasiolReviewRepository dasiolReviewRepository;
 
-    @Autowired
-    private DasiolStoreRepository dasiolStoreRepository;
+        @Autowired
+        private DasiolStoreRepository dasiolStoreRepository;
 
-    @Autowired
-    private StorePhotoRepository StorePhotoRepository;
+        @Autowired
+        private StorePhotoRepository StorePhotoRepository;
 
-    public List<StorePhotoResponseDTO> insert(StorePhotoRequestDTO request) {
-        System.out.println("[debug] >>> storePhoto service insert ");
+        public List<StorePhotoResponseDTO> insert(@RequestBody @Valid StorePhotoRequestDTO request) {
+                System.out.println("[debug] >>> storePhoto service insert ");
 
-        // 스토어 엔티티 조회
-        DasiolStoreEntity store = dasiolStoreRepository.findById(request.getStoreId())
-                .orElseThrow(() -> new RuntimeException("스토어 없음"));
+                // 스토어 엔티티 조회
+                DasiolStoreEntity store = dasiolStoreRepository.findById(request.getStoreId())
+                                .orElseThrow(() -> new RuntimeException("스토어 없음"));
 
-        // 리뷰 엔티티 조회
-        DasiolReviewEntity review = dasiolReviewRepository.findById(request.getReviewId())
-                .orElseThrow(() -> new RuntimeException("리뷰 없음"));
+                // 리뷰 엔티티 조회
+                DasiolReviewEntity review = dasiolReviewRepository.findById(request.getReviewId())
+                                .orElseThrow(() -> new RuntimeException("리뷰 없음"));
 
-        StorePhotoEntity photo = StorePhotoEntity.builder()
-                .store(store)
-                .review(review)
-                .photoUrl(request.getPhotoUrl())
-                .build();
-        review.getPhotos().add(photo);
-        StorePhotoRepository.save(photo);
+                StorePhotoEntity photo = StorePhotoEntity.builder()
+                                .store(store)
+                                .review(review)
+                                .photoUrl(request.getPhotoUrl())
+                                .build();
+                review.getPhotos().add(photo);
+                StorePhotoRepository.save(photo);
 
-        Optional<StorePhotoEntity> allPhotos = StorePhotoRepository.findByReview_ReviewId(request.getReviewId());
-        return allPhotos.stream()
-                .map(e -> StorePhotoResponseDTO.fromEntity(e))
-                .toList();
-    }
-
-    public void delete(Integer reviewId, Integer storePhotoId) {
-
-        System.out.println("[debug] >>> storePhoto service delete storePhoto ");
-        StorePhotoEntity photo = StorePhotoRepository.findById(storePhotoId)
-                .orElseThrow(() -> new RuntimeException("사진이 존재하지 않습니다. ID=" + storePhotoId));
-
-        if (!photo.getReview().getReviewId().equals(reviewId)) {
-            throw new RuntimeException("잘못된 요청입니다.");
+                Optional<StorePhotoEntity> allPhotos = StorePhotoRepository
+                                .findByReview_ReviewId(request.getReviewId());
+                return allPhotos.stream()
+                                .map(e -> StorePhotoResponseDTO.fromEntity(e))
+                                .toList();
         }
 
-        StorePhotoRepository.delete(photo);
+        public void delete(Integer reviewId, Integer storePhotoId) {
 
-    }
+                System.out.println("[debug] >>> storePhoto service delete storePhoto ");
+                StorePhotoEntity photo = StorePhotoRepository.findById(storePhotoId)
+                                .orElseThrow(() -> new RuntimeException("사진이 존재하지 않습니다. ID=" + storePhotoId));
+
+                if (!photo.getReview().getReviewId().equals(reviewId)) {
+                        throw new RuntimeException("잘못된 요청입니다.");
+                }
+
+                StorePhotoRepository.delete(photo);
+
+        }
 }

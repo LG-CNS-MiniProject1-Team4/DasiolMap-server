@@ -14,6 +14,9 @@ import com.dasiolmapserver.dasiolmap.tag.domain.dto.TagResponseDTO;
 import com.dasiolmapserver.dasiolmap.tag.domain.entity.TagEntity;
 import com.dasiolmapserver.dasiolmap.tag.repository.TagRepository;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
+
 @Service
 public class TagService {
     @Autowired
@@ -22,7 +25,7 @@ public class TagService {
     @Autowired
     private DasiolStoreRepository dasiolStoreRepository;
 
-    public List<TagResponseDTO> insert(TagRequestDTO request) {
+    public List<TagResponseDTO> insert(@RequestBody @Valid TagRequestDTO request) {
         System.out.println("[debug] >>> Tag service insert ");
 
         // 스토어 엔티티 조회

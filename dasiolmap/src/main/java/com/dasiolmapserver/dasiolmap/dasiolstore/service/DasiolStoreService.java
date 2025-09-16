@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewRequsetDTO;
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewRequestDTO;
 
-import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreRequsetDTO;
+import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreRequestDTO;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreResponseDTO;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
@@ -17,7 +17,9 @@ import com.dasiolmapserver.dasiolmap.storeTag.repository.StoreTagRepository;
 import com.dasiolmapserver.dasiolmap.tag.domain.dto.TagRequestDTO;
 import com.dasiolmapserver.dasiolmap.tag.repository.TagRepository;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @Service
 public class DasiolStoreService {
@@ -44,8 +46,9 @@ public class DasiolStoreService {
                 .toList();
     }
 
-    public DasiolStoreResponseDTO insert(DasiolStoreRequsetDTO request) {
+    public DasiolStoreResponseDTO insert(@RequestBody @Valid DasiolStoreRequestDTO request) {
         System.out.println("[debug] >>> store service insert ");
+
         DasiolStoreEntity store = dasiolStoreRepository.save(DasiolStoreEntity.builder()
                 .storeName(request.getStoreName())
                 .address(request.getAddress())
@@ -68,7 +71,7 @@ public class DasiolStoreService {
     }
 
     @Transactional
-    public DasiolStoreEntity update(Integer storeId, DasiolStoreRequsetDTO request) {
+    public DasiolStoreEntity update(Integer storeId, @RequestBody @Valid DasiolStoreRequestDTO request) {
         System.out.println("[debug] >>> store service update ");
         DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("가게 없음"));
@@ -80,7 +83,7 @@ public class DasiolStoreService {
     }
 
     @Transactional
-    public DasiolStoreEntity update(Integer storeId, StoreTagRequestDTO request) {
+    public DasiolStoreEntity update(Integer storeId, @RequestBody @Valid StoreTagRequestDTO request) {
         System.out.println("[debug] >>> store service update : StoreTag ");
         DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("가게 없음"));
@@ -91,7 +94,7 @@ public class DasiolStoreService {
     }
 
     @Transactional
-    public DasiolStoreEntity update(Integer storeId, TagRequestDTO request) {
+    public DasiolStoreEntity update(Integer storeId, @RequestBody @Valid TagRequestDTO request) {
         System.out.println("[debug] >>> store service update : Tag");
         DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("가게 없음"));
@@ -102,7 +105,7 @@ public class DasiolStoreService {
     }
 
     @Transactional
-    public DasiolStoreEntity update(Integer storeId, DasiolReviewRequsetDTO request) {
+    public DasiolStoreEntity update(Integer storeId, @RequestBody @Valid DasiolReviewRequestDTO request) {
         System.out.println("[debug] >>> store service update ");
         DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("가게 없음"));

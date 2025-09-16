@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
-import com.dasiolmapserver.dasiolmap.storePhoto.domain.dto.StorePhotoResponseDTO;
-import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
-import com.dasiolmapserver.dasiolmap.storePhoto.repository.StorePhotoRepository;
+
 import com.dasiolmapserver.dasiolmap.storeTag.domain.dto.StoreTagRequestDTO;
 import com.dasiolmapserver.dasiolmap.storeTag.domain.dto.StoreTagResponseDTO;
 import com.dasiolmapserver.dasiolmap.storeTag.domain.entity.StoreTagEntity;
 import com.dasiolmapserver.dasiolmap.storeTag.repository.StoreTagRepository;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 
 @Service
 public class StoreTagService {
@@ -24,7 +25,7 @@ public class StoreTagService {
     @Autowired
     private DasiolStoreRepository dasiolStoreRepository;
 
-    public List<StoreTagResponseDTO> insert(StoreTagRequestDTO request) {
+    public List<StoreTagResponseDTO> insert(@RequestBody @Valid StoreTagRequestDTO request) {
         System.out.println("[debug] >>> storeTag service insert ");
 
         // 스토어 엔티티 조회

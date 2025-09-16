@@ -10,12 +10,14 @@ import com.dasiolmapserver.dasiolmap.bookmark.domain.dto.BookmarkRequestDTO;
 import com.dasiolmapserver.dasiolmap.bookmark.domain.dto.BookmarkResponseDTO;
 import com.dasiolmapserver.dasiolmap.bookmark.domain.entity.BookmarkEntity;
 import com.dasiolmapserver.dasiolmap.bookmark.repository.BookmarkRepository;
-import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewResponseDTO;
-import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
+
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
 import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 
 @Service
 public class BookmarkService {
@@ -41,7 +43,7 @@ public class BookmarkService {
                                 .toList();
         }
 
-        public List<BookmarkResponseDTO> insert(BookmarkRequestDTO request) {
+        public List<BookmarkResponseDTO> insert(@RequestBody @Valid BookmarkRequestDTO request) {
                 System.out.println("[debug] >>> store service insert ");
 
                 // 스토어 엔티티 조회

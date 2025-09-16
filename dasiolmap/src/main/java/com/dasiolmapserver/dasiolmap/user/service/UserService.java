@@ -12,6 +12,9 @@ import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
 import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
+
 @Service
 public class UserService {
 
@@ -20,7 +23,7 @@ public class UserService {
     @Autowired
     private JwtProvider provider;
 
-    public UserResponseDTO signup(UserRequestDTO request) {
+    public UserResponseDTO signup(@RequestBody @Valid UserRequestDTO request) {
         System.out.println(">>> service signup");
         UserEntity entity = userRepository.save(request.toEntity());
         System.out.println(">>> after save: " + entity);
@@ -31,7 +34,7 @@ public class UserService {
         return dto;
     }
 
-    public Map<String, Object> login(UserRequestDTO request) {
+    public Map<String, Object> login(@RequestBody @Valid UserRequestDTO request) {
         System.out.println(">>> service login");
         UserEntity entity = userRepository.findByEmailAndPasswd(request.getEmail(), request.getPasswd());
 

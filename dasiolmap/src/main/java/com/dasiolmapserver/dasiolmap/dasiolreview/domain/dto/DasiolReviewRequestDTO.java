@@ -19,7 +19,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DasiolReviewRequsetDTO {
+public class DasiolReviewRequestDTO {
     private String review;
     private float rating;
     private Integer storeId;
