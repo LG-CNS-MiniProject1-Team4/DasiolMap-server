@@ -9,7 +9,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class DasiolmapApplication {
 	public static void main(String[] args) {
 
-		Dotenv env = Dotenv.configure().directory("dasiolmap").ignoreIfMissing().load();
+		Dotenv env = Dotenv.configure().directory("./").ignoreIfMissing().load();
 		env.entries().forEach(entry -> System.setProperty(entry.getKey(),
 				entry.getValue()));
 
