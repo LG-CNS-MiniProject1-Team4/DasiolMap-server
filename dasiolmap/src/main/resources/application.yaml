@@ -1,6 +1,6 @@
 spring:
   application:
-    name: dasiolmap
+    name: dasiolmap 
 
   ai:
     openai:

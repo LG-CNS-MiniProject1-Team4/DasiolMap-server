@@ -12,8 +12,6 @@ import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
 import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
-import jakarta.transaction.Transactional;
-
 @Service
 public class UserService {
 
@@ -49,18 +47,20 @@ public class UserService {
 
     }
 
-    @Transactional
-    public UserEntity update(String userEmail, UserRequestDTO request) {
-        System.out.println("[debug] >>> store service update ");
-        UserEntity entity = userRepository.findByEmail(userEmail)
+    public UserResponseDTO update(String email, UserRequestDTO request) {
+        System.out.println(">>> service updateUser");
+
+        UserEntity user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new RuntimeException("유저 없음"));
 
-        if (request.getNickname() != null) {
-            entity.setNickname(request.getNickname());
+        if (request.getNickname() != null && request.getPasswd() != null) {
+            user.setNickname(request.getNickname());
+            user.setPasswd(request.getPasswd());
+            System.out.println("update success/ nickname: " + user.getNickname() + ", passwd: " + user.getPasswd());
         }
-        if (request.getPasswd() != null) {
-            entity.setPasswd(request.getPasswd());
-        }
-        return entity;
+
+        UserEntity updated = userRepository.save(user);
+
+        return UserResponseDTO.fromEntity(updated);
     }
 }

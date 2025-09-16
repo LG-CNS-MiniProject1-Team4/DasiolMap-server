@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dasiolmapserver.dasiolmap.user.domain.dto.UserRequestDTO;
 import com.dasiolmapserver.dasiolmap.user.domain.dto.UserResponseDTO;
 import com.dasiolmapserver.dasiolmap.user.service.UserService;
+import com.dasiolmapserver.dasiolmap.util.JwtProvider;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,5 +62,4 @@ public class UserCtrl {
                 .header("Refresh-Token", (String) (map.get("refresh")))
                 .body((UserResponseDTO) map.get("response"));
     }
-
 }

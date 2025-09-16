@@ -4,7 +4,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.dasiolmapserver.dasiolmap.bookmark.domain.entity.BookmarkEntity;
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
-import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.time.LocalDateTime;
@@ -14,8 +13,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
