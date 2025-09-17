@@ -1,6 +1,7 @@
 package com.dasiolmapserver.dasiolmap.storePhoto.domain.dto;
 
 import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

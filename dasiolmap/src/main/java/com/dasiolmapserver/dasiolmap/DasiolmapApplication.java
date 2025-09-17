@@ -12,7 +12,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class DasiolmapApplication {
 	public static void main(String[] args) {
 
-		Dotenv env = Dotenv.configure().ignoreIfMissing().load();
+        // build오류시 절대 경로 문제일 확률이 높습니다 운영체제가 달라 발생할수 있는 문제로 directory("./") -> directory("/dasiolmap") 변경해주시면 감사하겠습니다
+		Dotenv env = Dotenv.configure().directory("./").ignoreIfMissing().load();
 		env.entries().forEach(entry -> System.setProperty(entry.getKey(),
 				entry.getValue()));
 
