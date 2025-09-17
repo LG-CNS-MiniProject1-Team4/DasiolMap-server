@@ -64,6 +64,9 @@ dependencies {
 	implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 	implementation 'com.fasterxml.jackson.core:jackson-databind'
 
+	// Elasticesarch 의존성을 추가
+	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
@@ -82,3 +85,4 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+

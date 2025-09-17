@@ -42,6 +42,9 @@ spring:
     console:
       enabled: true
       path: /h2-console # http://localhost:8088/h2-console
+  # Elasticsearch 설정 추가
+  elasticsearch:
+    uris: http://localhost:9200
 
 server:
   port: 8088
@@ -52,6 +55,8 @@ jwt:
   #secret: jslim-super-secret-key-for-jwt-123456789
 
 # openApi:
+openApi:
   serviceKey: ${SERVICE_KEY}
   callBackUrl: ${CALLBACKURL}
   dataType: ${TYPE}
+

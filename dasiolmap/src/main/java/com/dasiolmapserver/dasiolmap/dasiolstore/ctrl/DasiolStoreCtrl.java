@@ -85,7 +85,7 @@ public class DasiolStoreCtrl {
 
     @PutMapping("/update/{storeId}")
     public ResponseEntity<Void> update(
-            @PathVariable("id") Integer storeId,
+            @PathVariable("storeId") Integer storeId,
             @RequestBody DasiolStoreRequestDTO request,
             @RequestHeader(value = "Authorization", required = false) String authHeader) {
 

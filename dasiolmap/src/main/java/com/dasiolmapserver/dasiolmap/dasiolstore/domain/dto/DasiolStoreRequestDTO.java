@@ -19,12 +19,14 @@ public class DasiolStoreRequestDTO {
     private String storeName;
     private String address;
     private String location;
+    private Float avgRating;
 
     public DasiolStoreEntity toEntity() {
         return DasiolStoreEntity.builder()
                 .storeName(this.storeName)
                 .address(this.address)
                 .location(this.location)
+                .avgRating(this.avgRating)
                 .build();
     }
 }

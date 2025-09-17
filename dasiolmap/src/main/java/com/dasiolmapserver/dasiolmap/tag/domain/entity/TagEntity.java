@@ -2,6 +2,7 @@ package com.dasiolmapserver.dasiolmap.tag.domain.entity;
 
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
