@@ -54,7 +54,7 @@ public class DasiolReviewService {
 
         // 2. 모든 리뷰의 평점(rating)의 평균을 계산합니다. (리뷰가 없으면 0.0)
         double averageRating = allReviews.stream()
-                                        .mapToInt(DasiolReviewEntity::getRating)
+                                        .mapToDouble(DasiolReviewEntity::getRating)
                                         .average()
                                         .orElse(0.0);
                                         
