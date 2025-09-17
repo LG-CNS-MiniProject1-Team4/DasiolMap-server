@@ -70,7 +70,7 @@ public class UserService {
 
     @Transactional
     public void deleteUser(Integer userId, String email) {
-        UserEntity user = userRepository.findById(userId)
+        UserEntity user = userRepository.findByEmail(email)
                     .orElseThrow( () -> new RuntimeException("사용자를 찾을 수 없습니다."));
         if(!user.getEmail().equals(email)){
             throw new RuntimeException("자신의 계정만 탈퇴할 수 있습니다.");
