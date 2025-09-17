@@ -20,6 +20,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
@@ -69,6 +71,19 @@ public class AuthUserCtrl {
         refreshTokenRepository.delete(email);
         System.out.println(">>>> Refresh token deleted for user: " + email);
         return ResponseEntity.ok().build();
+    }
+
+    @SecurityRequirement(name = "bearerAuth")
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable("userId") Integer userId, @RequestHeader(value = "Authorization", required = false) String authHeader){
+        
+        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        String token = authHeader.substring(7);
+        String email = jwtProvider.getEmailFromToken(token);
+        userService.deleteUser(userId, email);
+        return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
     }
 
 }
