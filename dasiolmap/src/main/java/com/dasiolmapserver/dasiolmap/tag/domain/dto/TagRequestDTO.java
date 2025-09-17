@@ -20,10 +20,10 @@ public class TagRequestDTO {
     private Integer storeId;
     private String tagName;
 
-    public TagEntity toEntity(DasiolStoreEntity store) {
+    public TagEntity toEntity(DasiolStoreEntity store, String tagName) {
         return TagEntity.builder()
                 .store(store)
-                .tagName(this.tagName)
+                .tagName(tagName)
                 .build();
     }
 
