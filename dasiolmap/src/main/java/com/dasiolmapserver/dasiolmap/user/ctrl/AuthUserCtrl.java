@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dasiolmapserver.dasiolmap.user.domain.dto.UserRequestDTO;
 import com.dasiolmapserver.dasiolmap.user.domain.dto.UserResponseDTO;
-import com.dasiolmapserver.dasiolmap.user.domain.dto.UserUpdateRequestDTO;
 import com.dasiolmapserver.dasiolmap.user.repository.RefreshTokenRepository;
 import com.dasiolmapserver.dasiolmap.user.service.UserService;
 import com.dasiolmapserver.dasiolmap.util.JwtProvider;
@@ -20,8 +20,8 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -47,7 +47,7 @@ public class AuthUserCtrl {
     
     @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/updateUser/{id}")
-    public ResponseEntity<UserResponseDTO> updateUser(@RequestBody UserUpdateRequestDTO request,
+    public ResponseEntity<UserResponseDTO> updateUser(@RequestBody UserRequestDTO request,
                                                                                 @RequestHeader(value = "Authorization", required = false) String authHeader) {
         System.out.println(">>>> user ctrl PUT /updateUser");
 
@@ -78,8 +78,17 @@ public class AuthUserCtrl {
         System.out.println(">>>> Refresh token deleted for user: " + email);
         return ResponseEntity.ok().build();
     }
-    
 
-
-    
+    @SecurityRequirement(name = "bearerAuth")
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable("userId") Integer userId, @RequestHeader(value = "Authorization", required = false) String authHeader){
+        
+        if(authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        String token = authHeader.substring(7);
+        String email = jwtProvider.getEmailFromToken(token);
+        userService.deleteUser(userId, email);
+        return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
+    }
 }

@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.dasiolmapserver.dasiolmap.user.domain.dto.UserRequestDTO;
 import com.dasiolmapserver.dasiolmap.user.domain.dto.UserResponseDTO;
-import com.dasiolmapserver.dasiolmap.user.domain.dto.UserUpdateRequestDTO;
 import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
 import com.dasiolmapserver.dasiolmap.util.JwtProvider;
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
@@ -48,7 +48,7 @@ public class UserService {
 
     }
 
-    public UserResponseDTO updateUser(String email, UserUpdateRequestDTO request) {
+    public UserResponseDTO updateUser(String email, UserRequestDTO request) {
         System.out.println(">>> service updateUser");
         
         
@@ -66,5 +66,15 @@ public class UserService {
         UserEntity updated = userRepository.save(user);
         
         return UserResponseDTO.fromEntity(updated);
+    }
+
+    @Transactional
+    public void deleteUser(Integer userId, String email) {
+        UserEntity user = userRepository.findById(userId)
+                    .orElseThrow( () -> new RuntimeException("사용자를 찾을 수 없습니다."));
+        if(!user.getEmail().equals(email)){
+            throw new RuntimeException("자신의 계정만 탈퇴할 수 있습니다.");
+        }
+        userRepository.delete(user);
     }
 }
