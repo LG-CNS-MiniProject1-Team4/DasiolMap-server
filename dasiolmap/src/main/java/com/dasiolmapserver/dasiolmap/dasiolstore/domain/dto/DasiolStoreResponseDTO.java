@@ -34,6 +34,36 @@ public class DasiolStoreResponseDTO {
         private List<TagResponseDTO> tags;
         private List<StoreTagResponseDTO> storeTags;
 
+        /**
+     * location 문자열에서 위도를 추출하여 반환합니다.
+     * @return 위도(Double)
+     */
+        public Double getLatitude() {
+                if (location == null || !location.contains(",")) {
+                return null;
+                }
+                try {
+                return Double.parseDouble(location.split(",")[0].trim());
+                } catch (Exception e) {
+                return null;
+                }
+        }
+
+        /**
+        * location 문자열에서 경도를 추출하여 반환합니다.
+        * @return 경도(Double)
+        */
+        public Double getLongitude() {
+                if (location == null || !location.contains(",")) {
+                return null;
+                }
+                try {
+                return Double.parseDouble(location.split(",")[1].trim());
+                } catch (Exception e) {
+                return null;
+                }
+        }
+
         public static DasiolStoreResponseDTO fromEntity(DasiolStoreEntity store) {
                 return DasiolStoreResponseDTO.builder()
                                 .storeId(store.getStoreId())
