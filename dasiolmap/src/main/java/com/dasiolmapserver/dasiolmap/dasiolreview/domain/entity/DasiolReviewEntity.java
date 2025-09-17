@@ -1,8 +1,5 @@
 package com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity;
 
-import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
-import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +42,7 @@ public class DasiolReviewEntity {
     private String review;
 
     @Column(nullable = false)
-    private float rating;   //1점에서 5점 사이로
+    private float rating;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "store")
@@ -53,7 +50,7 @@ public class DasiolReviewEntity {
     private DasiolStoreEntity store;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user")
     @JsonBackReference
     private UserEntity user;
 

@@ -12,26 +12,21 @@ import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreResponseD
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository;
 import com.dasiolmapserver.dasiolmap.storeTag.domain.dto.StoreTagRequestDTO;
+import com.dasiolmapserver.dasiolmap.dasiolreview.domain.dto.DasiolReviewRequestDTO;
 
 import com.dasiolmapserver.dasiolmap.storeTag.repository.StoreTagRepository;
 import com.dasiolmapserver.dasiolmap.tag.domain.dto.TagRequestDTO;
 import com.dasiolmapserver.dasiolmap.tag.repository.TagRepository;
-<<<<<<< HEAD
 import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
 import com.dasiolmapserver.dasiolmap.util.JwtProvider;
-=======
->>>>>>> origin/dev/#11-api-test
 
 import jakarta.transaction.Transactional;
 
 
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.document.DasiolStoreDocument;
 import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreSearchRepository;
-import jakarta.transaction.Transactional;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 @Service
 public class DasiolStoreService {
@@ -47,15 +42,10 @@ public class DasiolStoreService {
     @Autowired
     private TagRepository tagRepository;
 
-<<<<<<< HEAD
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private JwtProvider provider;
 
-=======
->>>>>>> origin/dev/#11-api-test
     public List<DasiolStoreResponseDTO> select() {
         System.out.println("[debug] >>> store service select ");
         List<DasiolStoreEntity> list = dasiolStoreRepository.findAll();
@@ -70,11 +60,6 @@ public class DasiolStoreService {
                 .toList();
     }
 
-<<<<<<< HEAD
-     public DasiolStoreResponseDTO insert(DasiolStoreRequsetDTO request) {
-        System.out.println("[debug] >>> store service insert ");
-        DasiolStoreEntity store = dasiolStoreRepository.save(request.toEntity());
-=======
     public DasiolStoreResponseDTO insert(DasiolStoreRequestDTO request) {
         System.out.println("[debug] >>> store service insert ");
 
@@ -84,7 +69,6 @@ public class DasiolStoreService {
                 .location(request.getLocation())
                 .build());
 
->>>>>>> origin/dev/#11-api-test
         return DasiolStoreResponseDTO.fromEntity(store);
     }
 
@@ -115,18 +99,17 @@ public class DasiolStoreService {
 
 
     @Transactional
-    public DasiolStoreEntity addReview(Integer storeId, DasiolReviewRequsetDTO request) {
+    public DasiolStoreEntity addReview(Integer storeId, DasiolReviewRequestDTO request) {
         System.out.println("[debug] >>> store service update ");
-        DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
+        DasiolStoreEntity storeEntity = dasiolStoreRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("가게 없음"));
 
         // userId를 사용해 UserEntity를 찾습니다.
-        UserEntity user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("사용자 없음"));
-
+                UserEntity userEntity = userRepository.findByEmail(request.getUserEmail())
+                .orElseThrow(() -> new RuntimeException("회원 없음"));
         // toEntity 메소드에 store와 user를 모두 전달합니다.
-        entity.getReviews().add(request.toEntity(entity, user));
-        return entity;
+        storeEntity.getReviews().add(request.toEntity(storeEntity, userEntity));
+        return storeEntity;
     }
     @Transactional
     public DasiolStoreEntity addStoreTag(Integer storeId, StoreTagRequestDTO request) {
@@ -163,11 +146,14 @@ public class DasiolStoreService {
                     .build();
             dasiolStoreSearchRepository.save(document);
         }
+    }
     public DasiolStoreEntity update(Integer storeId, DasiolReviewRequestDTO request) {
         System.out.println("[debug] >>> store service update ");
-        DasiolStoreEntity entity = dasiolStoreRepository.findById(storeId)
+        DasiolStoreEntity storeEntity = dasiolStoreRepository.findById(storeId)
                 .orElseThrow(() -> new RuntimeException("가게 없음"));
-        entity.getReviews().add(request.toEntity(entity));
-        return entity;
+                UserEntity userEntity = userRepository.findByEmail(request.getUserEmail())
+                .orElseThrow(() -> new RuntimeException("회원 없음"));
+        storeEntity.getReviews().add(request.toEntity(storeEntity, userEntity));
+        return storeEntity;
     }
 }

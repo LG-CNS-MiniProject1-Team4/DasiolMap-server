@@ -38,7 +38,8 @@ public class DasiolReviewService {
         System.out.println("[debug] >>> review service insert review ");
         DasiolStoreEntity store = storeRepository.findById(request.getStoreId())
                 .orElseThrow(() -> new RuntimeException("가게가 존재하지 않습니다. ID=" + request.getStoreId()));
-
+        UserEntity user = userRepository.findByEmail(request.getUserEmail())
+                .orElseThrow(() -> new RuntimeException("회원 없음"));
         DasiolReviewEntity review = request.toEntity(store, user); // 👈 toEntity 호출 방식 변경
 
         store.getReviews().add(review);
@@ -47,8 +48,10 @@ public class DasiolReviewService {
         reviewRepository.save(review);
 
          // 1. 현재 가게의 모든 리뷰를 가져옵니다.
-        List<DasiolReviewEntity> allReviews = reviewRepository.findByStoreStoreId(request.getStoreId());
+        List<DasiolReviewEntity> allReviews = reviewRepository.findByStore_StoreId(request.getStoreId());
         
+        //
+
         // 2. 모든 리뷰의 평점(rating)의 평균을 계산합니다. (리뷰가 없으면 0.0)
         double averageRating = allReviews.stream()
                                         .mapToInt(DasiolReviewEntity::getRating)

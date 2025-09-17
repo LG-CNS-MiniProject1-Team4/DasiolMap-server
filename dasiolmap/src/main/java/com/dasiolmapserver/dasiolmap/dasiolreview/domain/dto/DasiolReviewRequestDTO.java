@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
-import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
+import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,15 +24,17 @@ public class DasiolReviewRequestDTO {
     private String review;
     private float rating;
     private Integer storeId;
+    private String userEmail;
 
     private List<StorePhotoEntity> photos;
 
     public DasiolReviewEntity toEntity(DasiolStoreEntity store, UserEntity user) {
         return DasiolReviewEntity.builder()
                 .review(this.review)
-                .rating(this.rating) // 받은 rating 값을 Entity로 넘겨줍니다.
+                .rating(this.rating)
                 .store(store)
                 .photos(this.photos)
+                .user(user)
                 .build();
     }
 
