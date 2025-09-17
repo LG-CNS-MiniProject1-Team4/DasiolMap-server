@@ -27,7 +27,7 @@ spring:
   jpa:
     hibernate:
       # create, create-drop, update, none
-      ddl-auto: none
+      ddl-auto: update
       # 맨 처음 실행 시 create -> none
     # 콘솔출력
     show-sql: true
@@ -54,3 +54,7 @@ jwt:
 #   serviceKey: ${SERVICE_KEY}
 #   callBackUrl: ${CALLBACKURL}
 #   dataType: ${TYPE}
+
+
+mybatis: 
+    mapper-locations: /mappers/**/*Mapper.xml

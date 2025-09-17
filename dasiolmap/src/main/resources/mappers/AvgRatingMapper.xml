@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "com.dasiolmapserver.dasiolmap.dasiolstore.repository.AvgRatingMapper">
+    <select id = "findStoresWithAvgRating" resultType = "com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreRequestDTO">
+        select s.store_id as storeId,
+               s.store_name as storeName,
+               avg(r.rating) as avgRating
+        from dasiol_store_entity s
+        left join dasiol_review_entity r on s.store_id = r.store_id
+        where s.store_id like #{storeId}
+        group by s.store_id
+    </select>
+
+    <insert id = "insertReview">
+        insert into dasiol_review_entity(store_id, rating, review, user_id)
+        values(#{storeId}, #{rating}, #{review}, #{userId})
+    </insert>
+</mapper>

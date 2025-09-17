@@ -35,10 +35,14 @@ public class DasiolStoreEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String storeId;
+    private int storeId;
 
     @Column(nullable = false, length = 10)
     private String storeName;
+
+    // 평균 별점
+    // @Column(nullable = true)
+    // private Double avgRating;
 
     @Column(nullable = false, length = 150)
     private String address;

@@ -33,6 +33,9 @@ public class DasiolReviewEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // 별점 1-5
+    private int rating;
+
     @Column(nullable = false, length = 500)
     private String review;
 
@@ -44,4 +47,5 @@ public class DasiolReviewEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "userId")
     private UserEntity user;
+
 }

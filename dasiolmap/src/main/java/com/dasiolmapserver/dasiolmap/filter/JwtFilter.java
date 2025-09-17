@@ -99,7 +99,7 @@ public class JwtFilter implements Filter {
         return path.startsWith("/swagger-ui") ||
                 path.startsWith("/v3/api-docs") ||
                 path.startsWith("/api/v2/dasiolmap/user/signup") ||
-                path.startsWith("/api/v2/dasiolmap/user/login");
+                path.startsWith("/api/v2/dasiolmap/user/login") ;
 
     }
 }
