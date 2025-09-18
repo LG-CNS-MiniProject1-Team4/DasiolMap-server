@@ -103,4 +103,20 @@ public class DasiolStoreCtrl {
         }
 
     }
+
+    // 가게 태그 기반 api 조회 로직
+    @SecurityRequirement(name = "bearerAuth")
+    @GetMapping("/search/store-tag/{storeTagId}")
+    public ResponseEntity<List<DasiolStoreResponseDTO>> searchByStoreTag(
+            @PathVariable("storeTagId") Integer storeTagId,
+            @RequestHeader(value = "Authorization", required = false) String authHeader) {
+
+        System.out.println("[debug] >>> store ctrl path : /search/store-tag/" + storeTagId);
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        List<DasiolStoreResponseDTO> list = storeService.findStoresByStoreTag(storeTagId);
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }
