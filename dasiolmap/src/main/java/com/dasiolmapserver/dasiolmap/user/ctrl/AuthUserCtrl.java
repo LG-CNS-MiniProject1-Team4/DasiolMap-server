@@ -24,6 +24,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.dasiolmapserver.dasiolmap.bookmark.domain.dto.BookmarkResponseDTO;
+import com.dasiolmapserver.dasiolmap.bookmark.service.BookmarkService;
+import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
+
+
 @SecurityScheme(name = "bearerAuth", type = SecuritySchemeType.HTTP, scheme = "bearer", bearerFormat = "JWT")
 @RestController
 @RequestMapping("/auth/api/v2/dasiolmap/user")
@@ -37,6 +43,10 @@ public class AuthUserCtrl {
 
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
+
+    @Autowired
+    private BookmarkService bookmarkService;
+
 
     @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/updateUser/{id}")
@@ -84,6 +94,18 @@ public class AuthUserCtrl {
         String email = jwtProvider.getEmailFromToken(token);
         userService.deleteUser(userId, email);
         return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
+    }
+
+    @SecurityRequirement(name = "bearerAuth")
+    @GetMapping("/bookmarks")
+    public ResponseEntity<List<BookmarkResponseDTO>> getUserBookmarks(@RequestHeader(value = "Authorization", required = false) String authHeader) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        String token = authHeader.substring(7);
+        String email = jwtProvider.getEmailFromToken(token);
+        List<BookmarkResponseDTO> bookmarks = bookmarkService.getUserBookmarks(email);
+        return ResponseEntity.ok(bookmarks);
     }
 
 }

@@ -16,6 +16,8 @@ import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepositor
 import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.dasiolmapserver.dasiolmap.user.repository.UserRepository;
 
+import java.util.stream.Collectors;
+
 @Service
 public class BookmarkService {
 
@@ -27,6 +29,15 @@ public class BookmarkService {
 
         @Autowired
         private UserRepository userRepository;
+
+        // BookmarkService에 조회 로직 추가
+        public List<BookmarkResponseDTO> getUserBookmarks(String userEmail) {
+        System.out.println("[debug] >>> bookmark service getUserBookmarks ");
+        return bookmarkRepository.findByUser_Email(userEmail)
+                .stream()
+                .map(BookmarkResponseDTO::fromEntity)
+                .collect(Collectors.toList());
+        }
 
         public List<BookmarkResponseDTO> select() {
                 System.out.println("[debug] >>> store service select ");
