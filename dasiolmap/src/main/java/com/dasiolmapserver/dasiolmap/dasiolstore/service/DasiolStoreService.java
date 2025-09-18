@@ -169,20 +169,4 @@ public class DasiolStoreService {
         storeEntity.getReviews().add(request.toEntity(storeEntity, userEntity));
         return storeEntity;
     }
-
-
-    // 가게 태그 검색 api로직
-        public List<DasiolStoreResponseDTO> findStoresByStoreTag(Integer storeTagId) {
-        System.out.println("[debug] >>> store service findStoresByStoreTag ");
-        List<DasiolStoreEntity> list = dasiolStoreRepository.findByStoreTags_StoreTagId(storeTagId);
-
-        return list.stream()
-                .map(entity -> DasiolStoreResponseDTO.builder()
-                        .storeId(entity.getStoreId())
-                        .storeName(entity.getStoreName())
-                        .address(entity.getAddress())
-                        .location(entity.getLocation())
-                        .build())
-                .toList();
-        }
 }
