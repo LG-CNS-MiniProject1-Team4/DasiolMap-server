@@ -46,15 +46,21 @@ public class DasiolStoreSearchCtrl {
         return ResponseEntity.ok(searchService.findStoresOrderByCreatedAt(sortOrder));
     }
 
-    // 추가된 API
+    
     @GetMapping("/stores/by-tag/{tagId}")
     public ResponseEntity<List<DasiolStoreResponseDTO>> searchStoresByTag(@PathVariable("tagId") Integer tagId) {
         return ResponseEntity.ok(dasiolStoreService.findStoresByTagId(tagId));
     }
 
-    // 추가된 API
+    
     @GetMapping("/stores/by-store-tag/{storeTagId}")
     public ResponseEntity<List<DasiolStoreResponseDTO>> searchStoresByStoreTag(@PathVariable("storeTagId") Integer storeTagId) {
         return ResponseEntity.ok(dasiolStoreService.findStoresByStoreTagId(storeTagId));
+    }
+
+    // 가게 주소 기반 검색
+    @GetMapping("/stores/by-address")
+    public ResponseEntity<List<DasiolStoreResponseDTO>> searchStoresByAddress(@RequestParam String keyword) {
+    return ResponseEntity.ok(searchService.searchStoresByAddress(keyword));
     }
 }

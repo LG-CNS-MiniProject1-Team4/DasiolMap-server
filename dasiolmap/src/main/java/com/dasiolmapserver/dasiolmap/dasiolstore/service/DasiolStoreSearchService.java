@@ -4,6 +4,8 @@ import co.elastic.clients.elasticsearch._types.SortOptions;
 import co.elastic.clients.elasticsearch._types.SortOrder;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.document.DasiolStoreDocument;
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.dto.DasiolStoreResponseDTO;
+import com.dasiolmapserver.dasiolmap.dasiolstore.repository.DasiolStoreRepository; 
+
 import java.util.stream.Collectors;
 import java.util.List;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
@@ -17,6 +19,9 @@ public class DasiolStoreSearchService {
 
     @Autowired
     private ElasticsearchOperations elasticsearchOperations;
+
+    @Autowired
+    private DasiolStoreRepository dasiolStoreRepository;
 
     public List<DasiolStoreResponseDTO> searchStores(String keyword, SortOrder sortOrder) {
         Query query = Query.of(q -> q
@@ -123,6 +128,13 @@ public class DasiolStoreSearchService {
                     .createdAt(doc.getCreatedAt())
                     .build();
             })
+            .collect(Collectors.toList());
+    }
+
+    // 주소 키워드를 파라미터로 받아 주소 키워드에 포함된 가게 목록 검색 구현 로직
+    public List<DasiolStoreResponseDTO> searchStoresByAddress(String addressKeyword) {
+    return dasiolStoreRepository.findByAddressContaining(addressKeyword).stream()
+            .map(DasiolStoreResponseDTO::fromEntity)
             .collect(Collectors.toList());
     }
 }

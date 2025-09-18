@@ -16,4 +16,7 @@ public interface DasiolStoreRepository extends JpaRepository<DasiolStoreEntity, 
 
     public List<DasiolStoreEntity> findByStoreTags_StoreTagId(Integer storeTagId);
 
+    // 주소에 특정 문자열이 포함된 가게 검색
+    List<DasiolStoreEntity> findByAddressContaining(String addressKeyword);
+
 }
