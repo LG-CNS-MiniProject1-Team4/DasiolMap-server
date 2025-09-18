@@ -1,6 +1,7 @@
 package com.dasiolmapserver.dasiolmap.tag.domain.entity;
 
 import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
@@ -36,6 +37,7 @@ public class TagEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "store")
+    @JsonBackReference
     private DasiolStoreEntity store;
 
 }

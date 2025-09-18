@@ -15,6 +15,7 @@ import com.dasiolmapserver.dasiolmap.tag.domain.entity.TagEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -76,13 +77,13 @@ public class DasiolStoreEntity {
     @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tag", joinColumns = @JoinColumn(name = "storeId"), inverseJoinColumns = @JoinColumn(name = "tagId"))
-    @JsonBackReference
+    @JsonManagedReference  
     private Set<TagEntity> tags = new HashSet<>();
 
     @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "storeTag", joinColumns = @JoinColumn(name = "storeId"), inverseJoinColumns = @JoinColumn(name = "storeTagId"))
-    @JsonBackReference
+    @JsonManagedReference 
     private Set<StoreTagEntity> storeTags = new HashSet<>();
 
 

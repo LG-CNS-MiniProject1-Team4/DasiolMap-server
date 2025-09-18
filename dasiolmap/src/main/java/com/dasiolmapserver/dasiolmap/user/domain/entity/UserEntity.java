@@ -5,6 +5,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.dasiolmapserver.dasiolmap.bookmark.domain.entity.BookmarkEntity;
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,12 +47,12 @@ public class UserEntity {
     private LocalDateTime createdAt;
 
     @Builder.Default
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DasiolReviewEntity> reviews = new ArrayList<>();
 
     @Builder.Default
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookmarkEntity> bookmarks = new ArrayList<>();
 }

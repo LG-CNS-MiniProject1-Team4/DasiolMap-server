@@ -7,6 +7,7 @@ import com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity.DasiolStoreEntity
 import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
 import com.dasiolmapserver.dasiolmap.user.domain.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -55,7 +56,7 @@ public class DasiolReviewEntity {
     private UserEntity user;
 
     @Builder.Default
-    @JsonBackReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StorePhotoEntity> photos = new ArrayList<>();
 }
