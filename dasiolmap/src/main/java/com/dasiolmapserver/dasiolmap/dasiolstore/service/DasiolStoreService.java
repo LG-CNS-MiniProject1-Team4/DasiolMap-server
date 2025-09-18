@@ -96,6 +96,26 @@ public class DasiolStoreService {
         return response;
     }
 
+    // 스토어 태그 ID 검색 메서드
+    public List<DasiolStoreResponseDTO> findStoresByTagId(Integer tagId) {
+        System.out.println("[debug] >>> store service findStoresByTagId ");
+        List<DasiolStoreEntity> list = dasiolStoreRepository.findByTags_TagId(tagId);
+
+        return list.stream()
+                .map(DasiolStoreResponseDTO::fromEntity)
+                .toList();
+    }
+
+    public List<DasiolStoreResponseDTO> findStoresByStoreTagId(Integer storeTagId) {
+        System.out.println("[debug] >>> store service findStoresByStoreTagId ");
+        List<DasiolStoreEntity> list = dasiolStoreRepository.findByStoreTags_StoreTagId(storeTagId);
+
+        return list.stream()
+                .map(DasiolStoreResponseDTO::fromEntity)
+                .toList();
+    }
+
+
     @Transactional
     public DasiolStoreEntity update(Integer storeId, DasiolStoreRequestDTO request) {
         System.out.println("[debug] >>> store service update ");
