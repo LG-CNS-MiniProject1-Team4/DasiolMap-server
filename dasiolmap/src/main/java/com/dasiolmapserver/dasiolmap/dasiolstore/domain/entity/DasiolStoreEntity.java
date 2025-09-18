@@ -1,9 +1,12 @@
 package com.dasiolmapserver.dasiolmap.dasiolstore.domain.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.dasiolmapserver.dasiolmap.dasiolreview.domain.entity.DasiolReviewEntity;
 import com.dasiolmapserver.dasiolmap.storePhoto.domain.entity.StorePhotoEntity;
@@ -29,6 +32,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+//스토어 시간 순차순 정렬 (필요한 import문)
+import java.time.LocalDateTime;
+import org.hibernate.annotations.CreationTimestamp;
+
 
 @Entity
 @Builder
@@ -76,4 +84,10 @@ public class DasiolStoreEntity {
     @JoinTable(name = "storeTag", joinColumns = @JoinColumn(name = "storeId"), inverseJoinColumns = @JoinColumn(name = "storeTagId"))
     @JsonBackReference
     private Set<StoreTagEntity> storeTags = new HashSet<>();
+
+
+    //스토어 시간 순차순 정렬 
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 }

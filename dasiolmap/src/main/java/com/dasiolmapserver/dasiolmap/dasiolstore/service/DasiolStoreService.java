@@ -143,6 +143,7 @@ public class DasiolStoreService {
                     .address(store.getAddress())
                     .location(store.getLocation())
                     .avgRating(store.getAvgRating())
+                    .createdAt(store.getCreatedAt())
                     .build();
             dasiolStoreSearchRepository.save(document);
         }

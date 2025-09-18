@@ -14,6 +14,7 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.stereotype.Service;
 @Service
 public class DasiolStoreSearchService {
+
     @Autowired
     private ElasticsearchOperations elasticsearchOperations;
 
@@ -74,6 +75,42 @@ public class DasiolStoreSearchService {
                     .storeName(doc.getStoreName())
                     .address(doc.getAddress())
                     .location(doc.getLocation())
+                    .build();
+            })
+            .collect(Collectors.toList());
+    }
+
+     /**
+     * 생성 시간 순으로 가게를 정렬하여 반환합니다.
+     * @param sortOrder 정렬 순서 (ASC: 오래된순, DESC: 최신순)
+     * @return 생성 시간 순으로 정렬된 가게 목록
+     */
+    public List<DasiolStoreResponseDTO> findStoresOrderByCreatedAt(SortOrder sortOrder) {
+        Query query = Query.of(q -> q.matchAll(m -> m)); // 모든 문서를 대상으로 합니다.
+
+        SortOptions sortOptions = new SortOptions.Builder()
+                .field(f -> f
+                        .field("createdAt")
+                        .order(sortOrder)
+                        .missing("_last")) // createdAt이 없는 데이터는 맨 뒤로 보냅니다.
+                .build();
+
+        NativeQuery nativeQuery = NativeQuery.builder()
+            .withQuery(query)
+            .withSort(sortOptions)
+            .build();
+
+        SearchHits<DasiolStoreDocument> searchHits = elasticsearchOperations.search(nativeQuery, DasiolStoreDocument.class);
+
+        return searchHits.getSearchHits().stream()
+            .map(hit -> {
+                DasiolStoreDocument doc = hit.getContent();
+                return DasiolStoreResponseDTO.builder()
+                    .storeId(doc.getStoreId())
+                    .storeName(doc.getStoreName())
+                    .address(doc.getAddress())
+                    .location(doc.getLocation())
+                    .createdAt(doc.getCreatedAt())
                     .build();
             })
             .collect(Collectors.toList());

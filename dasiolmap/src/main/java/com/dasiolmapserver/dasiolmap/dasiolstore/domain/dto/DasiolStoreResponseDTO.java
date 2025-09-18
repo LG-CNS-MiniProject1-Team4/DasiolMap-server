@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Builder
 @Setter
 @Getter
@@ -28,6 +30,8 @@ public class DasiolStoreResponseDTO {
         private String address;
         private String location;
         private Float avgRating;
+        private LocalDateTime createdAt;
+        
 
         private List<DasiolReviewResponseDTO> reviews;
         private List<StorePhotoResponseDTO> photos;
@@ -71,6 +75,7 @@ public class DasiolStoreResponseDTO {
                                 .address(store.getAddress())
                                 .location(store.getLocation())
                                 .avgRating(store.getAvgRating())
+                                .createdAt(store.getCreatedAt())
                                 .reviews(store.getReviews().stream()
                                                 .map(e -> DasiolReviewResponseDTO.fromEntity(e))
                                                 .toList())
