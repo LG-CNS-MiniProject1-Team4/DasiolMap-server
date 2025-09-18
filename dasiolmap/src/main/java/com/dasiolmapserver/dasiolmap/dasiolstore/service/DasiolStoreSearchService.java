@@ -18,7 +18,7 @@ public class DasiolStoreSearchService {
     @Autowired
     private ElasticsearchOperations elasticsearchOperations;
 
-    public List<DasiolStoreResponseDTO> searchStores(String keyword) {
+    public List<DasiolStoreResponseDTO> searchStores(String keyword, SortOrder sortOrder) {
         Query query = Query.of(q -> q
             .multiMatch(mm -> mm
                 .query(keyword)
@@ -26,8 +26,17 @@ public class DasiolStoreSearchService {
             )
         );
 
+        // 정렬 옵션 추가
+        SortOptions sortOptions = new SortOptions.Builder()
+                .field(f -> f
+                        .field("createdAt") // 정렬 기준 필드
+                        .order(sortOrder)   // 파라미터로 받은 정렬 순서
+                        .missing("_last"))
+                .build();
+
         NativeQuery nativeQuery = NativeQuery.builder()
                 .withQuery(query)
+                .withSort(sortOptions) // 쿼리에 정렬 옵션 적용
                 .build();
 
         SearchHits<DasiolStoreDocument> searchHits = elasticsearchOperations.search(nativeQuery, DasiolStoreDocument.class);
@@ -40,6 +49,7 @@ public class DasiolStoreSearchService {
                             .storeName(doc.getStoreName())
                             .address(doc.getAddress())
                             .location(doc.getLocation())
+                            .createdAt(doc.getCreatedAt())
                             .build();
                 })
                 .collect(Collectors.toList());

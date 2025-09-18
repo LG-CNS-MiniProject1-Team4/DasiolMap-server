@@ -63,11 +63,23 @@ public class DasiolStoreService {
     public DasiolStoreResponseDTO insert(DasiolStoreRequestDTO request) {
         System.out.println("[debug] >>> store service insert ");
 
+        // 1. MariaDB에 가게 정보 저장
         DasiolStoreEntity store = dasiolStoreRepository.save(DasiolStoreEntity.builder()
                 .storeName(request.getStoreName())
                 .address(request.getAddress())
                 .location(request.getLocation())
                 .build());
+
+        // 2. Elasticsearch에도 동일한 정보를 Document로 만들어 저장 (이 부분이 추가됨)
+        DasiolStoreDocument document = DasiolStoreDocument.builder()
+                .storeId(store.getStoreId())
+                .storeName(store.getStoreName())
+                .address(store.getAddress())
+                .location(store.getLocation())
+                .avgRating(store.getAvgRating())
+                .createdAt(store.getCreatedAt()) // createdAt도 잊지 말고 추가
+                .build();
+        dasiolStoreSearchRepository.save(document);
 
         return DasiolStoreResponseDTO.fromEntity(store);
     }

@@ -19,8 +19,14 @@ public class DasiolStoreSearchCtrl {
     private DasiolStoreSearchService searchService;
 
     @GetMapping("/stores")
-    public ResponseEntity<List<DasiolStoreResponseDTO>> searchStores(@RequestParam String keyword) {
-        return ResponseEntity.ok(searchService.searchStores(keyword));
+    public ResponseEntity<List<DasiolStoreResponseDTO>> searchStores(
+            @RequestParam String keyword,
+            @RequestParam(defaultValue = "desc") String sort) { // sort 파라미터 추가
+
+        // "asc"이면 오름차순(오래된순), 그 외에는 모두 내림차순(최신순)
+        SortOrder sortOrder = "asc".equalsIgnoreCase(sort) ? SortOrder.Asc : SortOrder.Desc;
+
+        return ResponseEntity.ok(searchService.searchStores(keyword, sortOrder));
     }
 
     @GetMapping("/stores/by-rating")
