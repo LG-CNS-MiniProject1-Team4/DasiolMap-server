@@ -47,7 +47,7 @@ public class DasiolStoreCtrl {
 
     @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/register")
-    public ResponseEntity<Void> register(
+    public ResponseEntity<DasiolStoreResponseDTO> register(
             @RequestBody DasiolStoreRequestDTO request,
             @RequestHeader(value = "Authorization", required = false) String authHeader) {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -58,7 +58,7 @@ public class DasiolStoreCtrl {
 
         DasiolStoreResponseDTO result = storeService.insert(request);
         if (result != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(null);
+            return ResponseEntity.status(HttpStatus.CREATED).body(result);
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
