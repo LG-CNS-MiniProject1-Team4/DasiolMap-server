@@ -15,6 +15,7 @@ import lombok.Setter;
 //스토어 날짜순 import문 추가
 import java.time.LocalDateTime;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 
 @Getter
 @Setter
@@ -38,6 +39,6 @@ public class DasiolStoreDocument {
     @Field(type = FieldType.Float, name = "avgRating")
     private Float avgRating;
 
-    @Field(type = FieldType.Date, name = "createdAt")
+    @Field(type = FieldType.Date, format = DateFormat.date_hour_minute_second_millis, pattern = "uuuu-MM-dd'T'HH:mm:ss.SSS")
     private LocalDateTime createdAt;
 }
