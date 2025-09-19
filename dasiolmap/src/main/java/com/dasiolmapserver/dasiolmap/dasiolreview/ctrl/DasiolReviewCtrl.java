@@ -1,6 +1,7 @@
 package com.dasiolmapserver.dasiolmap.dasiolreview.ctrl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -34,12 +36,20 @@ public class DasiolReviewCtrl {
 
     @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/register")
+
     public ResponseEntity<List<DasiolReviewResponseDTO>> register(
-            @RequestBody DasiolReviewRequestDTO request,
-            @RequestHeader(value = "Authorization", required = false) String authHeader) {
+        @RequestBody Map<String, Object> map,    
+        @RequestHeader(value = "Authorization", required = false) String authHeader) {
 
         System.out.println("[debug] >>> store review ctrl path POST : /register ");
-        System.out.println("[debug] param dto = " + request);
+        System.out.println("[debug] param dto = " + map.get("review") );
+        DasiolReviewRequestDTO request = DasiolReviewRequestDTO.builder()
+                                            .review((String)(map.get("review")))
+                                            .rating((Integer)(map.get("rating")))
+                                            .storeId((Integer)(map.get("storeId")))
+                                            .userEmail((String)(map.get("userEmail")))
+                                            .build() ; 
+         System.out.println(">>>>>> request " + request );    
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
