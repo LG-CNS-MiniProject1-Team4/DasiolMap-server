@@ -57,7 +57,7 @@
 -   MariaDB (또는 H2)
 -   Elasticsearch
 
-### 설치 및 실행
+### 🏁 설치 및 실행
 
 1.  **레포지토리 클론:**
     ```bash
@@ -92,9 +92,9 @@
 
 ## 📖 API 문서
 
-API 명세는 Notion를 통해 자동으로 문서화됩니다. 애플리케이션 실행 후 아래 주소로 접속하여 확인할 수 있습니다.
+API 명세는 Swagger를 통해 자동으로 문서화됩니다. 애플리케이션 실행 후 아래 주소로 접속하여 확인할 수 있습니다.
 
--   **Notion UI**: `http://localhost:8088/swagger-ui/index.html`
+-   **Swagger UI**: `http://localhost:8088/swagger-ui/index.html`
 
 ## 🗄️ 데이터베이스 구조
 
@@ -110,4 +110,14 @@ API 명세는 Notion를 통해 자동으로 문서화됩니다. 애플리케이�
 ![image.png](attachment:880e60c7-1636-4648-a9ba-e271e8e52e58:image.png)
 
 ## 👨‍👩‍👧‍👦 팀원
+📃**FrontEnd**  
 
+- **박조아**  :
+- 변경탁  :
+- 이현진  :
+
+📜 **BackEnd** 
+
+- **장준희**  :  맛집/리뷰 포스팅,삭제  관련 관리 , DB 연결
+- 이수림  :  회원가입, 일반 로그인, 로그아웃, 개인정보 관련 관리
+- 정영호  :  Filtering관련 API
