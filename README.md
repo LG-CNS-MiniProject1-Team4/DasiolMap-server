@@ -1,7 +1,7 @@
-# DasiolMap-server
-###DasiolMap 프로젝트의 백엔드 서버입니다. 본 프로젝트는 사용자가 주변 상점을 검색하고, 리뷰를 작성하며, 즐겨찾기를 관리할 수 있는 기능을 제공하는 RESTful API 서버입니다.
+DasiolMap-server
+DasiolMap 프로젝트의 백엔드 서버입니다. 본 프로젝트는 사용자가 주변 상점을 검색하고, 리뷰를 작성하며, 즐겨찾기를 관리할 수 있는 기능을 제공하는 RESTful API 서버입니다.
 
-목차
+📑 목차
 프로젝트 소개
 
 주요 기능
@@ -20,10 +20,10 @@ API 문서
 
 팀원
 
-프로젝트 소개
+📌 프로젝트 소개
 DasiolMap은 지도 기반의 상점 정보 공유 서비스입니다. 사용자는 이 서비스를 통해 원하는 상점을 쉽게 찾고, 다른 사용자들과 리뷰 및 평점을 공유할 수 있습니다. 이 프로젝트는 DasiolMap 서비스의 핵심 비즈니스 로직을 처리하는 백엔드 API 서버입니다.
 
-주요 기능
+✨ 주요 기능
 사용자 인증:
 
 JWT(JSON Web Token)를 이용한 회원가입, 로그인, 로그아웃 기능
@@ -56,7 +56,7 @@ JWT(JSON Web Token)를 이용한 회원가입, 로그인, 로그아웃 기능
 
 상점에 태그 추가 및 관리
 
-기술 스택
+🛠️ 기술 스택
 언어: Java 17
 
 프레임워크: Spring Boot 3.4.9
@@ -73,7 +73,7 @@ API 문서화: Swagger (SpringDoc OpenAPI)
 
 기타: Lombok, dotenv-java
 
-시작 가이드
+🚀 시작 가이드
 Prerequisites
 Java 17
 
@@ -116,12 +116,12 @@ Bash
 
 H2 콘솔: http://localhost:8088/h2-console
 
-API 문서
-API 명세는 Notion를 통해 자동으로 문서화됩니다. 애플리케이션 실행 후 아래 주소로 접속하여 확인할 수 있습니다.
+📖 API 문서
+API 명세는 Swagger를 통해 자동으로 문서화됩니다. 애플리케이션 실행 후 아래 주소로 접속하여 확인할 수 있습니다.
 
+Swagger UI: http://localhost:8088/swagger-ui/index.html
 
-
-데이터베이스 구조
+🗄️ 데이터베이스 구조
 주요 엔티티와 관계는 다음과 같습니다.
 
 UserEntity: 사용자 정보
@@ -136,5 +136,6 @@ StorePhotoEntity: 리뷰에 첨부된 사진 정보
 
 TagEntity, StoreTagEntity: 상점 태그 정보
 
+(간단한 ER 다이어그램 이미지를 추가하면 좋습니다.)
 
-
+👨‍👩‍👧‍👦 팀원
